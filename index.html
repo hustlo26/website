@@ -433,7 +433,7 @@
     <nav aria-label="Footer">
       <a href="https://www.instagram.com/hustlo_dot_in/" target="_blank" rel="noopener">Instagram</a>
       <a href="https://www.linkedin.com/company/hustlo/" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="mailto:hello@hustlo.in">Email</a>
+      <a href="mailto:admin@hustlo.in" id="email-link" title="Click to copy">admin@hustlo.in</a>
       <a href="/privacy">Privacy</a>
     </nav>
     <span>© 2026 Hustlo</span>
@@ -441,6 +441,19 @@
 </footer>
 
 <script>
+  // Footer email: copy to clipboard on click (mailto fallback if clipboard is unavailable).
+  const emailLink = document.getElementById("email-link");
+  if (emailLink && navigator.clipboard) {
+    emailLink.addEventListener("click", e => {
+      e.preventDefault();
+      const addr = emailLink.textContent;
+      navigator.clipboard.writeText(addr).then(() => {
+        emailLink.textContent = "Copied!";
+        setTimeout(() => { emailLink.textContent = addr; }, 1500);
+      }, () => { window.location.href = emailLink.href; });
+    });
+  }
+
   // Paste your form endpoint here (e.g. Formspree: https://formspree.io/f/xxxx).
   // Leave empty to show a fallback message.
   const FORM_ENDPOINT = "https://formspree.io/f/mppdlbwr";
@@ -470,7 +483,7 @@
 
     if (!FORM_ENDPOINT) {
       status.className = "status err";
-      status.textContent = "The waitlist isn't connected yet. Email hello@hustlo.in to join.";
+      status.textContent = "The waitlist isn't connected yet. Email admin@hustlo.in to join.";
       return;
     }
 
@@ -488,7 +501,7 @@
       document.getElementById("thanks").style.display = "block";
     } catch (err) {
       status.className = "status err";
-      status.textContent = "Something went wrong. Please try again, or email hello@hustlo.in.";
+      status.textContent = "Something went wrong. Please try again, or email admin@hustlo.in.";
       btn.disabled = false;
       btn.textContent = "Join the waitlist";
     }

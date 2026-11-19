@@ -172,6 +172,10 @@
     .founder{grid-template-columns:1fr;padding:28px}
     form{padding:22px}
   }
+  /* Back to top */
+  .to-top{position:fixed;right:20px;bottom:20px;z-index:20;width:48px;height:48px;border-radius:50%;border:0;background:var(--orange);color:var(--navy);display:grid;place-items:center;cursor:pointer;box-shadow:0 6px 18px rgba(18,24,38,.25);opacity:0;visibility:hidden;transform:translateY(10px);transition:opacity .2s,transform .2s,visibility .2s,background .15s}
+  .to-top.show{opacity:1;visibility:visible;transform:none}
+  .to-top:hover{background:var(--orange-dark);color:var(--white)}
   @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
@@ -442,7 +446,16 @@
   </div>
 </footer>
 
+<button class="to-top" id="to-top" type="button" aria-label="Back to top"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+
 <script>
+  // Back to top button: show after scrolling down.
+  const toTop = document.getElementById("to-top");
+  const toggleToTop = () => toTop.classList.toggle("show", window.scrollY > 600);
+  window.addEventListener("scroll", toggleToTop, { passive: true });
+  toggleToTop();
+  toTop.addEventListener("click", () => window.scrollTo({ top: 0 }));
+
   // Footer email: copy to clipboard on click (mailto fallback if clipboard is unavailable).
   const emailLink = document.getElementById("email-link");
   if (emailLink && navigator.clipboard) {

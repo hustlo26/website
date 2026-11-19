@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hustlo — Run your creator business</title>
+<meta name="description" content="Hustlo helps creators manage collaboration enquiries, quotes, payments and repeat clients in one place. Join the early-access waitlist.">
+<meta property="og:title" content="Hustlo — Run your creator business">
+<meta property="og:description" content="Enquiries, quotes, payments and repeat clients, in one place. Built for creators.">
+<meta property="og:url" content="https://hustlo.in">
+<meta name="theme-color" content="#121826">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#121826; --navy-2:#1B2335; --ink:#121826; --muted:#4A5468;
+    --line:#E3E1DA; --paper:#F7F5F0; --white:#FFFFFF;
+    --orange:#FF5A1F; --orange-dark:#C8400F; --on-dark:#C9CFDA;
+    --radius:14px; --max:1120px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--ink);background:var(--paper);line-height:1.6;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-family:"Space Grotesk",Inter,sans-serif;line-height:1.1;margin:0;letter-spacing:-0.02em}
+  p{margin:0}
+  a{color:inherit}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+  .skip{position:absolute;left:-999px;top:8px;background:var(--orange);color:var(--navy);padding:8px 14px;border-radius:8px;z-index:10}
+  .skip:focus{left:8px}
+  :focus-visible{outline:3px solid var(--orange);outline-offset:3px;border-radius:6px}
+
+  /* Logo */
+  .logo{display:inline-flex;align-items:flex-end;gap:3px;font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:26px;letter-spacing:-1px;line-height:.9;text-decoration:none}
+  .logo i{width:8px;height:8px;border-radius:50%;background:var(--orange);margin-bottom:3px;display:block}
+
+  /* Buttons */
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 22px;border-radius:999px;font:600 16px Inter,sans-serif;text-decoration:none;border:0;cursor:pointer;transition:background .15s,transform .15s}
+  .btn-primary{background:var(--orange);color:var(--navy)}
+  .btn-primary:hover{background:#FF7440;transform:translateY(-1px)}
+  .btn-ghost{background:transparent;color:var(--white);border:1.5px solid #3A4459}
+  .btn-ghost:hover{border-color:var(--on-dark)}
+
+  /* Header + hero */
+  .dark{background:var(--navy);color:var(--white)}
+  header .wrap{display:flex;align-items:center;justify-content:space-between;height:76px}
+  header nav{display:flex;align-items:center;gap:28px}
+  header nav a.link{color:var(--on-dark);text-decoration:none;font-weight:500;font-size:15px}
+  header nav a.link:hover{color:var(--white)}
+  .hero{padding:72px 0 96px}
+  .hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
+  .eyebrow{display:inline-block;font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--orange);margin-bottom:18px}
+  .hero h1{font-size:clamp(40px,5.6vw,64px)}
+  .hero h1 em{font-style:normal;color:var(--orange)}
+  .hero .lead{font-size:19px;color:var(--on-dark);margin:22px 0 32px;max-width:540px}
+  .hero .ctas{display:flex;gap:14px;flex-wrap:wrap}
+  .hero .note{margin-top:18px;font-size:14px;color:#A4ACBB}
+
+  /* Hero visual: lead card */
+  .mock{background:var(--navy-2);border:1px solid #2C3650;border-radius:20px;padding:22px;box-shadow:0 30px 60px rgba(0,0,0,.35)}
+  .mock-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+  .mock-top b{font-family:"Space Grotesk";font-size:15px}
+  .pill{font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px}
+  .pill.ok{background:#1F3B2C;color:#7FE0A8}
+  .pill.wait{background:#3B2A1F;color:#FFB48F}
+  .row{display:flex;justify-content:space-between;align-items:center;padding:13px 0;border-top:1px solid #2C3650;font-size:14px}
+  .row span{color:var(--on-dark)}
+  .row strong{font-weight:600}
+  .bar{height:8px;border-radius:99px;background:#2C3650;margin-top:16px;overflow:hidden}
+  .bar i{display:block;height:100%;width:40%;background:var(--orange)}
+  .mock small{display:block;margin-top:8px;color:#A4ACBB;font-size:12px}
+  .mock-actions{display:flex;gap:10px;margin-top:18px}
+  .mock-actions span{flex:1;text-align:center;font-size:13px;font-weight:600;padding:10px;border-radius:10px;background:#2C3650;color:var(--white)}
+  .mock-actions span.go{background:var(--orange);color:var(--navy)}
+
+  /* Sections */
+  section{padding:96px 0}
+  .head{max-width:660px;margin-bottom:48px}
+  .head h2{font-size:clamp(30px,3.8vw,44px)}
+  .head p{margin-top:14px;font-size:18px;color:var(--muted)}
+
+  /* Problem */
+  .pains{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .pain{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:24px}
+  .pain h3{font-size:18px;margin:14px 0 8px}
+  .pain p{color:var(--muted);font-size:15px}
+  .ico{width:40px;height:40px;border-radius:10px;display:grid;place-items:center;background:#FFE8DF;color:var(--orange-dark)}
+  .ico svg{width:22px;height:22px}
+
+  /* Loop */
+  .loop{background:var(--white);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .steps{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(6,1fr);gap:12px;counter-reset:s}
+  .steps li{position:relative;padding:20px 16px;border-radius:var(--radius);background:var(--paper);border:1px solid var(--line);counter-increment:s}
+  .steps li::before{content:counter(s);display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--navy);color:var(--white);font:700 14px "Space Grotesk";margin-bottom:12px}
+  .steps li:last-child::before{background:var(--orange);color:var(--navy)}
+  .steps h3{font-size:17px;margin-bottom:6px}
+  .steps p{font-size:14px;color:var(--muted)}
+
+  /* Features */
+  .features{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .feat{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:28px}
+  .feat h3{font-size:20px;margin:16px 0 8px}
+  .feat p{color:var(--muted);font-size:15px}
+  .feat .ico{background:var(--navy);color:var(--orange)}
+  .soon{display:inline-block;margin-left:6px;font:600 11px Inter;letter-spacing:.04em;text-transform:uppercase;color:var(--orange-dark);vertical-align:middle}
+
+  /* Who */
+  .who{display:flex;flex-wrap:wrap;gap:12px}
+  .who span{background:var(--white);border:1px solid var(--line);border-radius:999px;padding:12px 20px;font-weight:500}
+
+  /* Founder */
+  .founder{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:start;background:var(--navy);color:var(--white);border-radius:24px;padding:44px}
+  .avatar{width:72px;height:72px;border-radius:50%;background:var(--orange);color:var(--navy);display:grid;place-items:center;font:700 30px "Space Grotesk"}
+  .founder blockquote{margin:0;font-size:20px;line-height:1.55;color:#E6E9EF}
+  .founder cite{display:block;margin-top:18px;font-style:normal;color:var(--on-dark);font-size:15px}
+  .founder cite b{color:var(--white)}
+
+  /* Waitlist */
+  .join .wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:start}
+  .join h2{font-size:clamp(32px,4vw,48px)}
+  .join .lead{margin-top:16px;color:var(--on-dark);font-size:18px}
+  .perks{list-style:none;padding:0;margin:28px 0 0;display:grid;gap:12px}
+  .perks li{display:flex;gap:10px;align-items:flex-start;color:#E6E9EF}
+  .perks svg{flex:none;width:22px;height:22px;color:var(--orange);margin-top:2px}
+  form{background:var(--white);color:var(--ink);border-radius:20px;padding:32px;display:grid;gap:18px}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  label{display:block;font-weight:600;font-size:14px;margin-bottom:6px}
+  label .opt{font-weight:400;color:var(--muted)}
+  input,select{width:100%;min-height:48px;padding:0 14px;border:1.5px solid #CFCCC3;border-radius:10px;font:16px Inter,sans-serif;color:var(--ink);background:var(--white)}
+  input:focus,select:focus{border-color:var(--navy);outline:none;box-shadow:0 0 0 3px rgba(255,90,31,.25)}
+  form .btn{width:100%}
+  .fine{font-size:13px;color:var(--muted)}
+  .status{font-size:15px;font-weight:500;min-height:1px}
+  .status.ok{color:#17663A}
+  .status.err{color:#B3261E}
+  .thanks{display:none;text-align:center;padding:24px 8px}
+  .thanks h3{font-size:26px;margin-bottom:10px}
+  .thanks p{color:var(--muted)}
+
+  /* FAQ */
+  .faq{max-width:780px}
+  details{border-bottom:1px solid var(--line);padding:20px 0}
+  summary{cursor:pointer;font:600 18px "Space Grotesk";list-style:none;display:flex;justify-content:space-between;gap:16px}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";color:var(--orange-dark);font-size:24px;line-height:1}
+  details[open] summary::after{content:"–"}
+  details p{margin-top:12px;color:var(--muted)}
+
+  /* Footer */
+  footer{padding:40px 0;font-size:14px;color:var(--on-dark)}
+  footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+  footer nav{display:flex;gap:22px;flex-wrap:wrap}
+  footer a{text-decoration:none}
+  footer a:hover{color:var(--white)}
+
+  /* Responsive */
+  @media (max-width:960px){
+    .hero .wrap,.join .wrap{grid-template-columns:1fr}
+    .pains{grid-template-columns:1fr 1fr}
+    .steps{grid-template-columns:repeat(3,1fr)}
+    .features{grid-template-columns:1fr 1fr}
+  }
+  @media (max-width:640px){
+    header nav a.link{display:none}
+    .hero{padding:40px 0 64px}
+    section{padding:64px 0}
+    .pains,.features,.two{grid-template-columns:1fr}
+    .steps{grid-template-columns:1fr 1fr}
+    .founder{grid-template-columns:1fr;padding:28px}
+    form{padding:22px}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="dark">
+  <header>
+    <div class="wrap">
+      <a class="logo" href="#top" aria-label="Hustlo home">hustlo<i aria-hidden="true"></i></a>
+      <nav aria-label="Main">
+        <a class="link" href="#how">How it works</a>
+        <a class="link" href="#features">Features</a>
+        <a class="link" href="#faq">FAQ</a>
+        <a class="btn btn-primary" href="#join">Join waitlist</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="hero" id="top">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow">For creators who get paid collabs</span>
+        <h1>Spend less time on collabs admin. <em>More time creating.</em></h1>
+        <p class="lead">Hustlo turns scattered DMs, forms, sheets and payment reminders into one simple flow: enquiry, quote, payment, delivery and repeat client.</p>
+        <div class="ctas">
+          <a class="btn btn-primary" href="#join">Get early access</a>
+          <a class="btn btn-ghost" href="#how">See how it works</a>
+        </div>
+        <p class="note">Early access opens to a small group of creators first.</p>
+      </div>
+
+      <div class="mock" role="img" aria-label="Example Hustlo collaboration card showing a book review deal with a quote accepted and 40 percent advance received">
+        <div class="mock-top">
+          <b>Book review + 2 reels</b>
+          <span class="pill ok">Quote accepted</span>
+        </div>
+        <div class="row"><span>Client</span><strong>@author.example</strong></div>
+        <div class="row"><span>Deliverables</span><strong>1 review · 2 reels</strong></div>
+        <div class="row"><span>Total</span><strong>₹[AMOUNT]</strong></div>
+        <div class="row"><span>Next step</span><span class="pill wait">Balance due on delivery</span></div>
+        <div class="bar"><i></i></div>
+        <small>40% advance received</small>
+        <div class="mock-actions"><span>Send reminder</span><span class="go">Mark delivered</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<main id="main">
+
+  <section>
+    <div class="wrap">
+      <div class="head">
+        <h2>Sound familiar?</h2>
+        <p>Paid collabs are great. Managing them is not.</p>
+      </div>
+      <div class="pains">
+        <div class="pain">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+          <h3>Enquiries everywhere</h3>
+          <p>DMs, WhatsApp, email and forms, with no single place to see who asked what.</p>
+        </div>
+        <div class="pain">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+          <h3>Time on non-serious leads</h3>
+          <p>Long chats and calls with people who never had the budget.</p>
+        </div>
+        <div class="pain">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 11h8M8 15h5"/></svg></div>
+          <h3>Quotes by hand</h3>
+          <p>Calculating prices, packages and discounts again for every single client.</p>
+        </div>
+        <div class="pain">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v20M17 6H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+          <h3>Payments slip</h3>
+          <p>Advances, balances and reminders tracked in your head or a messy sheet.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="loop" id="how">
+    <div class="wrap">
+      <div class="head">
+        <h2>One loop, from enquiry to repeat client</h2>
+        <p>Hustlo runs the busywork at every step, so nothing falls through the cracks.</p>
+      </div>
+      <ol class="steps">
+        <li><h3>Enquiry</h3><p>Clients fill your branded form, linked from your bio.</p></li>
+        <li><h3>Qualify</h3><p>Your rules filter leads by budget, service and details.</p></li>
+        <li><h3>Quote</h3><p>Prices calculate automatically. Clients accept in one tap.</p></li>
+        <li><h3>Get paid</h3><p>Advance and balance tracked, with reminders sent for you.</p></li>
+        <li><h3>Deliver</h3><p>Deadlines, deliverables and status in one view.</p></li>
+        <li><h3>Rebook</h3><p>Loyalty offers bring past clients back.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="features">
+    <div class="wrap">
+      <div class="head">
+        <h2>Everything your collab business needs</h2>
+        <p>Set it up once with your own services, prices and policies. No spreadsheets or tech skills needed.</p>
+      </div>
+      <div class="features">
+        <div class="feat">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+          <h3>Smart enquiry form</h3>
+          <p>A link-in-bio form with your own fields. Every lead gets an ID, and duplicates are caught.</p>
+        </div>
+        <div class="feat">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18M7 12h10M10 18h4"/></svg></div>
+          <h3>Lead filtering</h3>
+          <p>Set a minimum budget and the services you offer. Hustlo sorts leads into qualified, review and not a fit.</p>
+        </div>
+        <div class="feat">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 15l2 2 4-4"/></svg></div>
+          <h3>Instant quotes</h3>
+          <p>Packages, quantities and discounts priced for you. Clients see a branded page and tap Accept.</p>
+        </div>
+        <div class="feat">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></div>
+          <h3>Payment tracking</h3>
+          <p>Advance and balance splits your way, with payment history and polite automatic reminders.</p>
+        </div>
+        <div class="feat">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <h3>Client history</h3>
+          <p>Every client's collabs, payments and conversations in one profile. Spot your best repeat clients.</p>
+        </div>
+        <div class="feat">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12v10H4V12M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg></div>
+          <h3>Repeat-client offers <span class="soon">Coming soon</span></h3>
+          <p>Loyalty discounts and win-back offers sent to past clients, without duplicate emails.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="head" style="margin-bottom:28px">
+        <h2>Built for independent creators</h2>
+      </div>
+      <div class="who">
+        <span>Bookstagrammers</span><span>Book reviewers</span><span>Poets</span><span>Voiceover artists</span><span>Instagram influencers</span><span>Small publishers</span><span>Freelance creators</span>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="founder">
+        <div class="avatar" aria-hidden="true">S</div>
+        <div>
+          <blockquote>“I run a creator business myself, and I was managing every collab through forms, sheets, Gmail and a pile of reminders. Hustlo is the tool I wanted: it handles the admin so creators can get back to creating.”</blockquote>
+          <cite><b>Shubham</b>, Founder of Hustlo</cite>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="dark join" id="join">
+    <div class="wrap">
+      <div>
+        <h2>Get early access</h2>
+        <p class="lead">We're opening Hustlo to a small group of creators first. Join the waitlist and help shape the product.</p>
+        <ul class="perks">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Be among the first to try it</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Personal help setting up your services and prices</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Direct say in what we build next</li>
+        </ul>
+      </div>
+
+      <form id="waitlist" novalidate>
+        <div id="fields">
+          <div class="two">
+            <div>
+              <label for="name">Your name</label>
+              <input id="name" name="name" autocomplete="name" required>
+            </div>
+            <div>
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" autocomplete="email" required>
+            </div>
+          </div>
+          <div class="two" style="margin-top:18px">
+            <div>
+              <label for="instagram">Instagram handle</label>
+              <input id="instagram" name="instagram" placeholder="@yourhandle" required>
+            </div>
+            <div>
+              <label for="niche">What do you create?</label>
+              <select id="niche" name="niche" required>
+                <option value="">Choose one</option>
+                <option>Book reviews / Bookstagram</option>
+                <option>Poetry / writing</option>
+                <option>Voiceovers</option>
+                <option>Lifestyle / influencer</option>
+                <option>Publisher / agency</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+          <div style="margin-top:18px">
+            <label for="volume">Paid collab enquiries per month <span class="opt">(roughly)</span></label>
+            <select id="volume" name="volume" required>
+              <option value="">Choose one</option>
+              <option>Fewer than 5</option>
+              <option>5–15</option>
+              <option>15–30</option>
+              <option>More than 30</option>
+            </select>
+          </div>
+          <button class="btn btn-primary" type="submit" style="margin-top:22px">Join the waitlist</button>
+          <p class="fine" style="margin-top:12px">We'll only email you about Hustlo early access. No spam, and you can opt out anytime.</p>
+          <p class="status" id="status" role="status" aria-live="polite"></p>
+        </div>
+        <div class="thanks" id="thanks">
+          <h3>You're on the list!</h3>
+          <p>Thanks for joining. We'll be in touch soon, and we may reach out for a quick chat about how you run your collabs.</p>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="head"><h2>Questions</h2></div>
+      <div class="faq">
+        <details>
+          <summary>Who is Hustlo for?</summary>
+          <p>Independent creators who get paid collaboration requests, such as book reviewers, poets, voiceover artists and influencers, plus small publishers and agencies.</p>
+        </details>
+        <details>
+          <summary>Do I need any technical skills?</summary>
+          <p>No. You add your services, prices and policies through a guided setup, and Hustlo handles the rest. No spreadsheets, code or workflow tools.</p>
+        </details>
+        <details>
+          <summary>Will it work with my own prices and services?</summary>
+          <p>Yes. Everything is configurable: services, packages, client categories, advance percentages, payment terms and message templates.</p>
+        </details>
+        <details>
+          <summary>Does Hustlo collect payments for me?</summary>
+          <p>Payments go directly to you. Hustlo tracks what's been paid and what's due, and sends reminders. Payment-link integrations are planned.</p>
+        </details>
+        <details>
+          <summary>How much will it cost?</summary>
+          <p>Pricing will be announced before launch. Waitlist members will hear about it first.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="dark">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Hustlo home" style="font-size:22px">hustlo<i aria-hidden="true"></i></a>
+    <nav aria-label="Footer">
+      <a href="https://www.instagram.com/hustlo">Instagram</a>
+      <a href="https://www.linkedin.com/company/hustlo">LinkedIn</a>
+      <span>hello@hustlo.in</span>
+      <a href="/privacy">Privacy</a>
+    </nav>
+    <span>© 2026 Hustlo</span>
+  </div>
+</footer>
+
+<script>
+  // Paste your form endpoint here (e.g. Formspree: https://formspree.io/f/xxxx).
+  // Leave empty to show a fallback message.
+  const FORM_ENDPOINT = "";
+
+  const form = document.getElementById("waitlist");
+  const status = document.getElementById("status");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    status.className = "status";
+    status.textContent = "";
+
+    const data = Object.fromEntries(new FormData(form));
+    const missing = ["name","email","instagram","niche","volume"].filter(k => !String(data[k] || "").trim());
+    if (missing.length) {
+      status.className = "status err";
+      status.textContent = "Please fill in all the fields.";
+      document.getElementById(missing[0]).focus();
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
+      status.className = "status err";
+      status.textContent = "Please enter a valid email address.";
+      document.getElementById("email").focus();
+      return;
+    }
+
+    if (!FORM_ENDPOINT) {
+      status.className = "status err";
+      status.textContent = "The waitlist isn't connected yet. Email hello@hustlo.in to join.";
+      return;
+    }
+
+    const btn = form.querySelector("button");
+    btn.disabled = true;
+    btn.textContent = "Joining…";
+    try {
+      const res = await fetch(FORM_ENDPOINT, {
+        method: "POST",
+        headers: { "Accept": "application/json", "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
+      if (!res.ok) throw new Error("Request failed");
+      document.getElementById("fields").style.display = "none";
+      document.getElementById("thanks").style.display = "block";
+    } catch (err) {
+      status.className = "status err";
+      status.textContent = "Something went wrong. Please try again, or email hello@hustlo.in.";
+      btn.disabled = false;
+      btn.textContent = "Join the waitlist";
+    }
+  });
+</script>
+</body>
+</html>

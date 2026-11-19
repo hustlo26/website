@@ -17,7 +17,7 @@ Plain HTML and CSS: no build step, no dependencies.
 
 The form posts JSON to the URL in `FORM_ENDPOINT`, near the bottom of `index.html`.
 Create a free form at https://formspree.io, then paste its endpoint (for example `https://formspree.io/f/abcdwxyz`) into that constant.
-If it's left empty, the form asks visitors to email hello@hustlo.in instead.
+If it's left empty, the form asks visitors to email admin@hustlo.in instead.
 
 ## Run locally
 

@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Hustlo — Run your creator business</title>
-<meta name="description" content="Hustlo helps creators manage collaboration enquiries, quotes, payments and repeat clients in one place. Join the early-access waitlist.">
-<meta property="og:title" content="Hustlo — Run your creator business">
-<meta property="og:description" content="Enquiries, quotes, payments and repeat clients, in one place. Built for creators.">
+<title>Hustlo — Collab management for creators</title>
+<meta name="description" content="Hustlo automates collab admin for creators: emails, follow-ups, negotiation, meeting scheduling, payment reminders and one view of all your collabs. Join the early-access waitlist.">
+<meta property="og:title" content="Hustlo — Your collabs, on autopilot">
+<meta property="og:description" content="Automated emails, follow-ups, meetings and payment reminders for creator collabs. For creators of every niche.">
 <meta property="og:url" content="https://hustlo.in">
 <meta name="theme-color" content="#121826">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -31,18 +31,15 @@
   .skip:focus{left:8px}
   :focus-visible{outline:3px solid var(--orange);outline-offset:3px;border-radius:6px}
 
-  /* Logo */
   .logo{display:inline-flex;align-items:flex-end;gap:3px;font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:26px;letter-spacing:-1px;line-height:.9;text-decoration:none}
   .logo i{width:8px;height:8px;border-radius:50%;background:var(--orange);margin-bottom:3px;display:block}
 
-  /* Buttons */
   .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 22px;border-radius:999px;font:600 16px Inter,sans-serif;text-decoration:none;border:0;cursor:pointer;transition:background .15s,transform .15s}
   .btn-primary{background:var(--orange);color:var(--navy)}
   .btn-primary:hover{background:#FF7440;transform:translateY(-1px)}
   .btn-ghost{background:transparent;color:var(--white);border:1.5px solid #3A4459}
   .btn-ghost:hover{border-color:var(--on-dark)}
 
-  /* Header + hero */
   .dark{background:var(--navy);color:var(--white)}
   header .wrap{display:flex;align-items:center;justify-content:space-between;height:76px}
   header nav{display:flex;align-items:center;gap:28px}
@@ -53,34 +50,37 @@
   .eyebrow{display:inline-block;font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--orange);margin-bottom:18px}
   .hero h1{font-size:clamp(40px,5.6vw,64px)}
   .hero h1 em{font-style:normal;color:var(--orange)}
-  .hero .lead{font-size:19px;color:var(--on-dark);margin:22px 0 32px;max-width:540px}
+  .hero .lead{font-size:19px;color:var(--on-dark);margin:22px 0 32px;max-width:560px}
   .hero .ctas{display:flex;gap:14px;flex-wrap:wrap}
   .hero .note{margin-top:18px;font-size:14px;color:#A4ACBB}
 
-  /* Hero visual: lead card */
+  /* Rotating example cards */
+  .mock-wrap{position:relative}
   .mock{background:var(--navy-2);border:1px solid #2C3650;border-radius:20px;padding:22px;box-shadow:0 30px 60px rgba(0,0,0,.35)}
-  .mock-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
-  .mock-top b{font-family:"Space Grotesk";font-size:15px}
-  .pill{font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px}
+  .mock[hidden]{display:none}
+  .mock-type{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#A4ACBB;margin-bottom:6px}
+  .mock-top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}
+  .mock-top b{font-family:"Space Grotesk";font-size:17px}
+  .pill{font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;white-space:nowrap}
   .pill.ok{background:#1F3B2C;color:#7FE0A8}
   .pill.wait{background:#3B2A1F;color:#FFB48F}
-  .row{display:flex;justify-content:space-between;align-items:center;padding:13px 0;border-top:1px solid #2C3650;font-size:14px}
+  .pill.info{background:#1F2E4A;color:#9DC1FF}
+  .row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 0;border-top:1px solid #2C3650;font-size:14px}
   .row span{color:var(--on-dark)}
-  .row strong{font-weight:600}
+  .row strong{font-weight:600;text-align:right}
   .bar{height:8px;border-radius:99px;background:#2C3650;margin-top:16px;overflow:hidden}
-  .bar i{display:block;height:100%;width:40%;background:var(--orange)}
+  .bar i{display:block;height:100%;background:var(--orange)}
   .mock small{display:block;margin-top:8px;color:#A4ACBB;font-size:12px}
-  .mock-actions{display:flex;gap:10px;margin-top:18px}
-  .mock-actions span{flex:1;text-align:center;font-size:13px;font-weight:600;padding:10px;border-radius:10px;background:#2C3650;color:var(--white)}
-  .mock-actions span.go{background:var(--orange);color:var(--navy)}
+  .dots{display:flex;gap:8px;justify-content:center;margin-top:18px}
+  .dots button{width:44px;height:44px;border:0;background:transparent;cursor:pointer;display:grid;place-items:center;padding:0}
+  .dots button span{width:10px;height:10px;border-radius:50%;background:#3A4459;display:block}
+  .dots button[aria-pressed="true"] span{background:var(--orange)}
 
-  /* Sections */
   section{padding:96px 0}
-  .head{max-width:660px;margin-bottom:48px}
+  .head{max-width:680px;margin-bottom:48px}
   .head h2{font-size:clamp(30px,3.8vw,44px)}
   .head p{margin-top:14px;font-size:18px;color:var(--muted)}
 
-  /* Problem */
   .pains{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
   .pain{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:24px}
   .pain h3{font-size:18px;margin:14px 0 8px}
@@ -88,35 +88,55 @@
   .ico{width:40px;height:40px;border-radius:10px;display:grid;place-items:center;background:#FFE8DF;color:var(--orange-dark)}
   .ico svg{width:22px;height:22px}
 
-  /* Loop */
-  .loop{background:var(--white);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  /* Who it's for */
+  .who{background:var(--white);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .models{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+  .model{border:1px solid var(--line);border-radius:var(--radius);padding:28px;background:var(--paper)}
+  .model h3{font-size:22px;margin:14px 0 8px}
+  .model > p{color:var(--muted);font-size:15px}
+  .tags{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+  .tags span{background:var(--white);border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:13px;font-weight:500}
+  .eg{font-size:14px;color:var(--ink);background:var(--white);border-radius:10px;padding:12px 14px;border:1px dashed #CFCCC3}
+  .eg b{color:var(--orange-dark)}
+  .model .ico{background:var(--navy);color:var(--orange)}
+
   .steps{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(6,1fr);gap:12px;counter-reset:s}
-  .steps li{position:relative;padding:20px 16px;border-radius:var(--radius);background:var(--paper);border:1px solid var(--line);counter-increment:s}
+  .steps li{position:relative;padding:20px 16px;border-radius:var(--radius);background:var(--white);border:1px solid var(--line);counter-increment:s}
   .steps li::before{content:counter(s);display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--navy);color:var(--white);font:700 14px "Space Grotesk";margin-bottom:12px}
   .steps li:last-child::before{background:var(--orange);color:var(--navy)}
   .steps h3{font-size:17px;margin-bottom:6px}
   .steps p{font-size:14px;color:var(--muted)}
 
-  /* Features */
   .features{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
   .feat{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:28px}
   .feat h3{font-size:20px;margin:16px 0 8px}
   .feat p{color:var(--muted);font-size:15px}
+  .feat .ex{margin-top:12px;font-size:13px;color:var(--ink)}
+  .feat .ex b{color:var(--orange-dark);font-weight:600}
   .feat .ico{background:var(--navy);color:var(--orange)}
   .soon{display:inline-block;margin-left:6px;font:600 11px Inter;letter-spacing:.04em;text-transform:uppercase;color:var(--orange-dark);vertical-align:middle}
 
-  /* Who */
-  .who{display:flex;flex-wrap:wrap;gap:12px}
-  .who span{background:var(--white);border:1px solid var(--line);border-radius:999px;padding:12px 20px;font-weight:500}
+  /* Case study */
+  .case{display:grid;grid-template-columns:1fr 1fr;gap:40px;background:var(--navy);color:var(--white);border-radius:24px;padding:48px}
+  .case .eyebrow{margin-bottom:12px}
+  .case h2{font-size:clamp(26px,3vw,36px)}
+  .case p{color:var(--on-dark);margin-top:16px;font-size:17px}
+  .flow{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+  .flow li{display:flex;gap:12px;align-items:flex-start;background:var(--navy-2);border:1px solid #2C3650;border-radius:12px;padding:14px 16px;color:#E6E9EF;font-size:15px}
+  .flow li b{font-family:"Space Grotesk";color:var(--orange);min-width:22px}
+  .case cite{display:block;margin-top:22px;font-style:normal;color:var(--on-dark);font-size:15px}
+  .case cite b{color:var(--white)}
 
-  /* Founder */
-  .founder{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:start;background:var(--navy);color:var(--white);border-radius:24px;padding:44px}
-  .avatar{width:72px;height:72px;border-radius:50%;background:var(--orange);color:var(--navy);display:grid;place-items:center;font:700 30px "Space Grotesk"}
-  .founder blockquote{margin:0;font-size:20px;line-height:1.55;color:#E6E9EF}
-  .founder cite{display:block;margin-top:18px;font-style:normal;color:var(--on-dark);font-size:15px}
-  .founder cite b{color:var(--white)}
+  /* Scope */
+  .scope{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .scope > div{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:28px}
+  .scope h3{font-size:20px;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+  .scope ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+  .scope li{display:flex;gap:10px;color:var(--muted);font-size:15px}
+  .scope svg{flex:none;width:20px;height:20px;margin-top:2px}
+  .yes svg{color:#17663A}
+  .no svg{color:#8A92A3}
 
-  /* Waitlist */
   .join .wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:start}
   .join h2{font-size:clamp(32px,4vw,48px)}
   .join .lead{margin-top:16px;color:var(--on-dark);font-size:18px}
@@ -132,13 +152,11 @@
   form .btn{width:100%}
   .fine{font-size:13px;color:var(--muted)}
   .status{font-size:15px;font-weight:500;min-height:1px}
-  .status.ok{color:#17663A}
   .status.err{color:#B3261E}
   .thanks{display:none;text-align:center;padding:24px 8px}
   .thanks h3{font-size:26px;margin-bottom:10px}
   .thanks p{color:var(--muted)}
 
-  /* FAQ */
   .faq{max-width:780px}
   details{border-bottom:1px solid var(--line);padding:20px 0}
   summary{cursor:pointer;font:600 18px "Space Grotesk";list-style:none;display:flex;justify-content:space-between;gap:16px}
@@ -147,18 +165,14 @@
   details[open] summary::after{content:"–"}
   details p{margin-top:12px;color:var(--muted)}
 
-  /* Footer */
   footer{padding:40px 0;font-size:14px;color:var(--on-dark)}
   footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
   footer nav{display:flex;gap:22px;flex-wrap:wrap}
   footer a{text-decoration:none}
   footer a:hover{color:var(--white)}
-  #email-link{position:relative}
-  #email-link.copied::after{content:"Copied!";position:absolute;left:50%;bottom:calc(100% + 6px);transform:translateX(-50%);padding:3px 8px;border-radius:6px;background:var(--white);color:#111;font-size:12px;white-space:nowrap;pointer-events:none}
 
-  /* Responsive */
   @media (max-width:960px){
-    .hero .wrap,.join .wrap{grid-template-columns:1fr}
+    .hero .wrap,.join .wrap,.case{grid-template-columns:1fr}
     .pains{grid-template-columns:1fr 1fr}
     .steps{grid-template-columns:repeat(3,1fr)}
     .features{grid-template-columns:1fr 1fr}
@@ -167,16 +181,26 @@
     header nav a.link{display:none}
     .hero{padding:40px 0 64px}
     section{padding:64px 0}
-    .pains,.features,.two{grid-template-columns:1fr}
+    .pains,.features,.two,.models,.scope{grid-template-columns:1fr}
     .steps{grid-template-columns:1fr 1fr}
-    .founder{grid-template-columns:1fr;padding:28px}
+    .case{padding:28px}
     form{padding:22px}
   }
-  /* Back to top */
-  .to-top{position:fixed;right:20px;bottom:20px;z-index:20;width:48px;height:48px;border-radius:50%;border:0;background:var(--orange);color:var(--navy);display:grid;place-items:center;cursor:pointer;box-shadow:0 6px 18px rgba(18,24,38,.25);opacity:0;visibility:hidden;transform:translateY(10px);transition:opacity .2s,transform .2s,visibility .2s,background .15s}
-  .to-top.show{opacity:1;visibility:visible;transform:none}
-  .to-top:hover{background:var(--orange-dark);color:var(--white)}
   @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+<style>
+  .niches{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .niche{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:20px}
+  .niche h3{font-size:17px;margin-bottom:6px}
+  .niche p{font-size:14px;color:var(--muted)}
+  .quote{margin:8px 0 0;font:500 22px/1.5 "Space Grotesk",sans-serif;color:#E6E9EF}
+  .auto{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+  .mail{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:22px}
+  .mail .when{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--orange-dark)}
+  .mail h3{font-size:18px;margin:8px 0 6px}
+  .mail p{font-size:15px;color:var(--muted)}
+  @media (max-width:960px){.niches{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:640px){.niches,.auto{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -188,7 +212,8 @@
       <a class="logo" href="#top" aria-label="Hustlo home">hustlo<i aria-hidden="true"></i></a>
       <nav aria-label="Main">
         <a class="link" href="#how">How it works</a>
-        <a class="link" href="#features">Features</a>
+        <a class="link" href="#automation">Automation</a>
+        <a class="link" href="#creators">Creators</a>
         <a class="link" href="#faq">FAQ</a>
         <a class="btn btn-primary" href="#join">Join waitlist</a>
       </nav>
@@ -198,28 +223,59 @@
   <div class="hero" id="top">
     <div class="wrap">
       <div>
-        <span class="eyebrow">For creators who get paid collabs</span>
-        <h1>Spend less time on collabs admin. <em>More time creating.</em></h1>
-        <p class="lead">Hustlo turns scattered DMs, forms, sheets and payment reminders into one simple flow: enquiry, quote, payment, delivery and repeat client.</p>
+        <span class="eyebrow">Collab management for creators</span>
+        <h1>Your collabs, <em>on autopilot.</em></h1>
+        <p class="lead">Hustlo handles the emails, follow-ups, negotiation, meetings and payment reminders behind every collab, from brand campaigns to paid features and promotions, and shows them all in one clear view. You create; Hustlo runs the rest.</p>
         <div class="ctas">
           <a class="btn btn-primary" href="#join">Get early access</a>
           <a class="btn btn-ghost" href="#how">See how it works</a>
         </div>
-        <p class="note">Early access opens to a small group of creators first.</p>
+        <p class="note">For creators of every niche. Early access opens to a small group first.</p>
       </div>
 
-      <div class="mock" role="img" aria-label="Example Hustlo collaboration card showing a book review deal with a quote accepted and 40 percent advance received">
-        <div class="mock-top">
-          <b>Book review + 2 reels</b>
-          <span class="pill ok">Quote accepted</span>
+      <div class="mock-wrap">
+        <div class="mock" data-card role="group" aria-label="Example: confirmed campaign">
+          <div class="mock-type">Confirmed campaign</div>
+          <div class="mock-top"><b>Festive campaign: 2 reels + 3 stories</b></div>
+          <div class="row"><span>Brand</span><strong>@ethnicwear.example</strong></div>
+          <div class="row"><span>Quote</span><span class="pill ok">Accepted</span></div>
+          <div class="row"><span>Call</span><strong>Booked for [DATE]</strong></div>
+          <div class="bar"><i style="width:50%"></i></div>
+          <small>50% advance received · Balance reminder scheduled</small>
         </div>
-        <div class="row"><span>Client</span><strong>@author.example</strong></div>
-        <div class="row"><span>Deliverables</span><strong>1 review · 2 reels</strong></div>
-        <div class="row"><span>Total</span><strong>₹[AMOUNT]</strong></div>
-        <div class="row"><span>Next step</span><span class="pill wait">Balance due on delivery</span></div>
-        <div class="bar"><i></i></div>
-        <small>40% advance received</small>
-        <div class="mock-actions"><span>Send reminder</span><span class="go">Mark delivered</span></div>
+        <div class="mock" data-card role="group" aria-label="Example: collab in negotiation" hidden>
+          <div class="mock-type">In negotiation</div>
+          <div class="mock-top"><b>Phone launch: 1 dedicated video</b></div>
+          <div class="row"><span>Brand</span><strong>@gadgets.example</strong></div>
+          <div class="row"><span>Negotiation</span><span class="pill wait">Counter-offer sent</span></div>
+          <div class="row"><span>Follow-up</span><strong>Auto in 2 days</strong></div>
+          <div class="bar"><i style="width:20%"></i></div>
+          <small>Waiting for the brand's reply</small>
+        </div>
+        <div class="mock" data-card role="group" aria-label="Example: collab with payment due" hidden>
+          <div class="mock-type">Content live</div>
+          <div class="mock-top"><b>Paid feature: recital reel + story</b></div>
+          <div class="row"><span>Client</span><strong>@brand.example</strong></div>
+          <div class="row"><span>Status</span><span class="pill info">Content live</span></div>
+          <div class="row"><span>Payment</span><strong>Balance due today</strong></div>
+          <div class="bar"><i style="width:80%"></i></div>
+          <small>Reminder sent automatically this morning</small>
+        </div>
+        <div class="mock" data-card role="group" aria-label="Example: repeat collab" hidden>
+          <div class="mock-type">Repeat collab</div>
+          <div class="mock-top"><b>Restaurant feature: 1 reel</b></div>
+          <div class="row"><span>Brand</span><strong>@cafe.example</strong></div>
+          <div class="row"><span>Status</span><span class="pill ok">Completed &amp; paid</span></div>
+          <div class="row"><span>Repeat brand</span><strong>3rd collab</strong></div>
+          <div class="bar"><i style="width:100%"></i></div>
+          <small>Loyalty offer ready to send</small>
+        </div>
+        <div class="dots" role="group" aria-label="Choose an example">
+          <button type="button" aria-label="Confirmed campaign example" aria-pressed="true"><span></span></button>
+          <button type="button" aria-label="Negotiation example" aria-pressed="false"><span></span></button>
+          <button type="button" aria-label="Payment due example" aria-pressed="false"><span></span></button>
+          <button type="button" aria-label="Repeat collab example" aria-pressed="false"><span></span></button>
+        </div>
       </div>
     </div>
   </div>
@@ -230,110 +286,176 @@
   <section>
     <div class="wrap">
       <div class="head">
-        <h2>Sound familiar?</h2>
-        <p>Paid collabs are great. Managing them is not.</p>
+        <h2>Getting collabs is the fun part. Managing them isn't.</h2>
+        <p>Most creators run collabs from DMs, email threads and a spreadsheet. Here's what that costs.</p>
       </div>
       <div class="pains">
         <div class="pain">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16v16H4z"/><path d="M22 6l-10 7L2 6"/></svg></div>
+          <h3>Endless emails</h3>
+          <p>Rate cards, quotes, follow-ups and "just checking in" mails, written by hand every time.</p>
+        </div>
+        <div class="pain">
           <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
-          <h3>Enquiries everywhere</h3>
-          <p>DMs, WhatsApp, email and forms, with no single place to see who asked what.</p>
+          <h3>Draining negotiations</h3>
+          <p>Low-budget and barter offers eat hours, and you second-guess every counter-offer.</p>
         </div>
         <div class="pain">
-          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
-          <h3>Time on non-serious leads</h3>
-          <p>Long chats and calls with people who never had the budget.</p>
-        </div>
-        <div class="pain">
-          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 11h8M8 15h5"/></svg></div>
-          <h3>Quotes by hand</h3>
-          <p>Calculating prices, packages and discounts again for every single client.</p>
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
+          <h3>Calls that go nowhere</h3>
+          <p>Meetings get booked before the other side has even agreed to your price.</p>
         </div>
         <div class="pain">
           <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v20M17 6H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
           <h3>Payments slip</h3>
-          <p>Advances, balances and reminders tracked in your head or a messy sheet.</p>
+          <p>Balances get forgotten, and chasing people for money feels awkward.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="loop" id="how">
+  <section class="who" id="how">
     <div class="wrap">
       <div class="head">
-        <h2>One loop, from enquiry to repeat client</h2>
-        <p>Hustlo runs the busywork at every step, so nothing falls through the cracks.</p>
+        <h2>How a collab runs on Hustlo</h2>
+        <p>From the first message to the next repeat collab, every step is tracked and the repetitive parts happen automatically.</p>
       </div>
       <ol class="steps">
-        <li><h3>Enquiry</h3><p>Clients fill your branded form, linked from your bio.</p></li>
-        <li><h3>Qualify</h3><p>Your rules filter leads by budget, service and details.</p></li>
-        <li><h3>Quote</h3><p>Prices calculate automatically. Clients accept in one tap.</p></li>
-        <li><h3>Get paid</h3><p>Advance and balance tracked, with reminders sent for you.</p></li>
-        <li><h3>Deliver</h3><p>Deadlines, deliverables and status in one view.</p></li>
-        <li><h3>Rebook</h3><p>Loyalty offers bring past clients back.</p></li>
+        <li><h3>Collab request</h3><p>Brands, businesses or other creators fill your collab form, linked from your bio or email.</p></li>
+        <li><h3>Screened</h3><p>Your rules check budget, deliverables and timeline.</p></li>
+        <li><h3>Quote &amp; negotiate</h3><p>Your rates go out in a branded quote. Counter-offers follow your rules.</p></li>
+        <li><h3>Meeting</h3><p>A call link is offered only after your terms are accepted.</p></li>
+        <li><h3>Create &amp; go live</h3><p>Track deliverables, approvals and go-live dates.</p></li>
+        <li><h3>Get paid &amp; rebook</h3><p>Automatic reminders, then offers that bring clients back.</p></li>
       </ol>
     </div>
   </section>
 
-  <section id="features">
+  <section id="automation">
     <div class="wrap">
       <div class="head">
-        <h2>Everything your collab business needs</h2>
-        <p>Set it up once with your own services, prices and policies. No spreadsheets or tech skills needed.</p>
+        <h2>The busywork that happens without you</h2>
+        <p>Set your rates, rules and templates once. Hustlo sends the right email at the right moment, and you can review anything before it goes.</p>
+      </div>
+      <div class="auto">
+        <div class="mail">
+          <span class="when">When a collab request arrives</span>
+          <h3>Instant reply with your rates</h3>
+          <p>A professional acknowledgement and your quote, so they hear back in minutes, not days.</p>
+        </div>
+        <div class="mail">
+          <span class="when">When someone goes quiet</span>
+          <h3>Polite follow-ups</h3>
+          <p>Follow-ups on your schedule, stopped automatically the moment they reply.</p>
+        </div>
+        <div class="mail">
+          <span class="when">When they negotiate</span>
+          <h3>Counter-offers within your limits</h3>
+          <p>Your minimum rates and package options are applied for you. Anything below your floor waits for your approval.</p>
+        </div>
+        <div class="mail">
+          <span class="when">When your quote is accepted</span>
+          <h3>Meeting scheduling</h3>
+          <p>They pick a slot from your availability. No back-and-forth, and no calls with anyone who hasn't committed.</p>
+        </div>
+        <div class="mail">
+          <span class="when">When a payment is due</span>
+          <h3>Payment reminders</h3>
+          <p>Advance and balance reminders sent for you, with every payment recorded against the collab.</p>
+        </div>
+        <div class="mail">
+          <span class="when">When a collab is done</span>
+          <h3>Thank-you and repeat offers <span class="soon">Coming soon</span></h3>
+          <p>A closing email, then loyalty offers to past clients, never sent twice.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="features" style="padding-top:0">
+    <div class="wrap">
+      <div class="head">
+        <h2>All your collabs, in one view</h2>
+        <p>No more digging through DMs and email threads to find out where a deal stands.</p>
       </div>
       <div class="features">
         <div class="feat">
-          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
-          <h3>Smart enquiry form</h3>
-          <p>A link-in-bio form with your own fields. Every lead gets an ID, and duplicates are caught.</p>
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="18" rx="1"/><rect x="14" y="3" width="7" height="11" rx="1"/></svg></div>
+          <h3>Collab pipeline</h3>
+          <p>Every deal by stage: new, negotiating, confirmed, in progress, live, paid.</p>
         </div>
         <div class="feat">
-          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18M7 12h10M10 18h4"/></svg></div>
-          <h3>Lead filtering</h3>
-          <p>Set a minimum budget and the services you offer. Hustlo sorts leads into qualified, review and not a fit.</p>
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+          <h3>Collab enquiry form</h3>
+          <p>One link for your bio and media kit. Brands and clients share budget, deliverables and dates upfront.</p>
         </div>
         <div class="feat">
           <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 15l2 2 4-4"/></svg></div>
-          <h3>Instant quotes</h3>
-          <p>Packages, quantities and discounts priced for you. Clients see a branded page and tap Accept.</p>
+          <h3>Rate card &amp; quotes</h3>
+          <p>Reels, stories, posts, videos and combos, with discounts, usage rights and add-ons priced automatically.</p>
         </div>
         <div class="feat">
-          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></div>
-          <h3>Payment tracking</h3>
-          <p>Advance and balance splits your way, with payment history and polite automatic reminders.</p>
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+          <h3>Deliverables &amp; go-live dates</h3>
+          <p>Track scripts, drafts, approvals and posting dates for every collab.</p>
         </div>
         <div class="feat">
           <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
           <h3>Client history</h3>
-          <p>Every client's collabs, payments and conversations in one profile. Spot your best repeat clients.</p>
+          <p>Every client's past collabs, payments and emails in one profile. Know your best repeat clients.</p>
         </div>
         <div class="feat">
-          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12v10H4V12M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg></div>
-          <h3>Repeat-client offers <span class="soon">Coming soon</span></h3>
-          <p>Loyalty discounts and win-back offers sent to past clients, without duplicate emails.</p>
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></div>
+          <h3>Earnings dashboard</h3>
+          <p>Collab income, pending payments and conversion rate by month and by content type.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section style="padding-top:0">
+  <section class="who" id="creators">
     <div class="wrap">
-      <div class="head" style="margin-bottom:28px">
-        <h2>Built for independent creators</h2>
+      <div class="head">
+        <h2>Built for every kind of creator</h2>
+        <p>Whatever your niche, collabs follow the same pattern. Hustlo adapts to your content, rates and process.</p>
       </div>
-      <div class="who">
-        <span>Bookstagrammers</span><span>Book reviewers</span><span>Poets</span><span>Voiceover artists</span><span>Instagram influencers</span><span>Small publishers</span><span>Freelance creators</span>
+      <div class="niches">
+        <div class="niche"><h3>Fashion &amp; beauty</h3><p>Campaigns, launches and festive collections</p></div>
+        <div class="niche"><h3>Tech &amp; gadgets</h3><p>Unboxings, reviews and launch videos</p></div>
+        <div class="niche"><h3>Food</h3><p>Restaurant features and product placements</p></div>
+        <div class="niche"><h3>Travel</h3><p>Hotel stays and tourism campaigns</p></div>
+        <div class="niche"><h3>Poetry &amp; writing</h3><p>Paid features, recitals and written promotions</p></div>
+        <div class="niche"><h3>Fitness &amp; wellness</h3><p>Brand ambassadors and app promotions</p></div>
+        <div class="niche"><h3>Finance &amp; education</h3><p>App, course and platform promotions</p></div>
+        <div class="niche"><h3>Comedy &amp; entertainment</h3><p>Brand integrations in sketches and reels</p></div>
+        <div class="niche"><h3>Gaming</h3><p>Game launches and sponsored streams</p></div>
+        <div class="niche"><h3>Parenting &amp; lifestyle</h3><p>Product reviews and long-term partnerships</p></div>
+        <div class="niche"><h3>UGC creators</h3><p>Content for brand ads, with usage rights</p></div>
+        <div class="niche"><h3>Meme &amp; theme pages</h3><p>Paid promotions and shoutouts</p></div>
+        <div class="niche"><h3>Creator-to-creator</h3><p>Featuring, reviewing or promoting other creators' work</p></div>
+        <div class="niche"><h3>Music &amp; voice</h3><p>Song features, covers and voiceovers for promotions</p></div>
       </div>
     </div>
   </section>
 
-  <section style="padding-top:0">
+  <section>
     <div class="wrap">
-      <div class="founder">
-        <div class="avatar" aria-hidden="true">S</div>
+      <div class="case">
         <div>
-          <blockquote>“I run a creator business myself, and I was managing every collab through forms, sheets, Gmail and a pile of reminders. Hustlo is the tool I wanted: it handles the admin so creators can get back to creating.”</blockquote>
-          <cite><b>Shubham</b>, Founder of Hustlo</cite>
+          <span class="eyebrow">From an early user</span>
+          <blockquote class="quote">“Every collab used to mean digging through DMs and emails to remember who I'd quoted and who still owed me. Now requests land in one place, follow-ups and payment reminders go out on their own, and I only step in when a decision is actually mine. I finally spend my time creating, not chasing.”</blockquote>
+          <cite><b>Ritu</b> · Poet &amp; content creator, pilot user</cite>
+        </div>
+        <div>
+          <h2 style="font-size:24px;margin-bottom:16px">A typical collab on Hustlo</h2>
+          <ol class="flow">
+            <li><b>1</b>A brand fills the collab form from the creator's Instagram bio.</li>
+            <li><b>2</b>The request is checked against budget and deliverable rules.</li>
+            <li><b>3</b>A quote goes out automatically, and the brand accepts it.</li>
+            <li><b>4</b>The advance is recorded, and a call is booked.</li>
+            <li><b>5</b>The content goes live, and a balance reminder goes out.</li>
+            <li><b>6</b>Months later, a loyalty offer brings the brand back for its next campaign.</li>
+          </ol>
         </div>
       </div>
     </div>
@@ -343,10 +465,10 @@
     <div class="wrap">
       <div>
         <h2>Get early access</h2>
-        <p class="lead">We're opening Hustlo to a small group of creators first. Join the waitlist and help shape the product.</p>
+        <p class="lead">We're opening Hustlo to a small group of creators first. Join the waitlist and help shape it.</p>
         <ul class="perks">
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Be among the first to try it</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Personal help setting up your services and prices</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Personal help setting up your rate card and emails</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Direct say in what we build next</li>
         </ul>
       </div>
@@ -369,20 +491,28 @@
               <input id="instagram" name="instagram" placeholder="@yourhandle" required>
             </div>
             <div>
-              <label for="niche">What do you create?</label>
+              <label for="niche">Your niche</label>
               <select id="niche" name="niche" required>
                 <option value="">Choose one</option>
-                <option>Book reviews / Bookstagram</option>
-                <option>Poetry / writing</option>
-                <option>Voiceovers</option>
-                <option>Lifestyle / influencer</option>
-                <option>Publisher / agency</option>
+                <option>Fashion &amp; beauty</option>
+                <option>Tech &amp; gadgets</option>
+                <option>Food</option>
+                <option>Travel</option>
+                <option>Poetry &amp; writing</option>
+                <option>Fitness &amp; wellness</option>
+                <option>Finance &amp; education</option>
+                <option>Comedy &amp; entertainment</option>
+                <option>Gaming</option>
+                <option>Parenting &amp; lifestyle</option>
+                <option>UGC creator</option>
+                <option>Meme / theme page</option>
+                <option>Talent manager / agency</option>
                 <option>Other</option>
               </select>
             </div>
           </div>
           <div style="margin-top:18px">
-            <label for="volume">Paid collab enquiries per month <span class="opt">(roughly)</span></label>
+            <label for="volume">Collab enquiries per month <span class="opt">(roughly)</span></label>
             <select id="volume" name="volume" required>
               <option value="">Choose one</option>
               <option>Fewer than 5</option>
@@ -397,7 +527,7 @@
         </div>
         <div class="thanks" id="thanks">
           <h3>You're on the list!</h3>
-          <p>Thanks for joining. We'll be in touch soon, and we may reach out for a quick chat about how you run your collabs.</p>
+          <p>Thanks for joining. We'll be in touch soon, and we may reach out for a quick chat about how you manage your collabs.</p>
         </div>
       </form>
     </div>
@@ -409,19 +539,27 @@
       <div class="faq">
         <details>
           <summary>Who is Hustlo for?</summary>
-          <p>Independent creators who get paid collaboration requests, such as book reviewers, poets, voiceover artists and influencers, plus small publishers and agencies.</p>
+          <p>Creators of any niche who take paid collaborations, whether that's brand campaigns, featuring or promoting other creators' work, or paid shoutouts. Talent managers handling several creators can use it too.</p>
         </details>
         <details>
-          <summary>Do I need any technical skills?</summary>
-          <p>No. You add your services, prices and policies through a guided setup, and Hustlo handles the rest. No spreadsheets, code or workflow tools.</p>
+          <summary>Does Hustlo find collabs for me?</summary>
+          <p>No. Hustlo isn't a marketplace. It manages the collabs that come to you, so you can say yes to more of them without drowning in admin.</p>
         </details>
         <details>
-          <summary>Will it work with my own prices and services?</summary>
-          <p>Yes. Everything is configurable: services, packages, client categories, advance percentages, payment terms and message templates.</p>
+          <summary>Will Hustlo negotiate or send emails without me?</summary>
+          <p>Only within the rules you set. Your rates, minimum budget and templates decide what goes out automatically, and anything outside them waits for your approval.</p>
+        </details>
+        <details>
+          <summary>Do brands or clients need to sign up?</summary>
+          <p>No. They fill your collab form and open quotes through a simple link. Only you need an account.</p>
         </details>
         <details>
           <summary>Does Hustlo collect payments for me?</summary>
           <p>Payments go directly to you. Hustlo tracks what's been paid and what's due, and sends reminders. Payment-link integrations are planned.</p>
+        </details>
+        <details>
+          <summary>Do I need any technical skills?</summary>
+          <p>No. Pick your niche, add your rates, and Hustlo suggests email templates and a starting setup you can adjust anytime.</p>
         </details>
         <details>
           <summary>How much will it cost?</summary>
@@ -437,41 +575,38 @@
   <div class="wrap">
     <a class="logo" href="#top" aria-label="Hustlo home" style="font-size:22px">hustlo<i aria-hidden="true"></i></a>
     <nav aria-label="Footer">
-      <a href="https://www.instagram.com/hustlo_dot_in/" target="_blank" rel="noopener">Instagram</a>
-      <a href="https://www.linkedin.com/company/hustlo/" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="mailto:admin@hustlo.in" id="email-link" title="Copy admin@hustlo.in">Email</a>
+      <a href="https://www.instagram.com/hustlo">Instagram</a>
+      <a href="https://www.linkedin.com/company/hustlo">LinkedIn</a>
+      <span>hello@hustlo.in</span>
       <a href="/privacy">Privacy</a>
     </nav>
     <span>© 2026 Hustlo</span>
   </div>
 </footer>
 
-<button class="to-top" id="to-top" type="button" aria-label="Back to top"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
-
 <script>
-  // Back to top button: show after scrolling down.
-  const toTop = document.getElementById("to-top");
-  const toggleToTop = () => toTop.classList.toggle("show", window.scrollY > 600);
-  window.addEventListener("scroll", toggleToTop, { passive: true });
-  toggleToTop();
-  toTop.addEventListener("click", () => window.scrollTo({ top: 0 }));
-
-  // Footer email: copy to clipboard on click (mailto fallback if clipboard is unavailable).
-  const emailLink = document.getElementById("email-link");
-  if (emailLink && navigator.clipboard) {
-    emailLink.addEventListener("click", e => {
-      e.preventDefault();
-      const addr = "admin@hustlo.in";
-      navigator.clipboard.writeText(addr).then(() => {
-        emailLink.classList.add("copied");
-        setTimeout(() => emailLink.classList.remove("copied"), 1500);
-      }, () => { window.location.href = emailLink.href; });
-    });
-  }
+  // Example card rotation
+  (function () {
+    const cards = Array.from(document.querySelectorAll("[data-card]"));
+    const dots = Array.from(document.querySelectorAll(".dots button"));
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let i = 0, timer = null;
+    function show(n) {
+      i = n;
+      cards.forEach((c, k) => { c.hidden = k !== n; });
+      dots.forEach((d, k) => d.setAttribute("aria-pressed", String(k === n)));
+    }
+    function start() { if (!reduce) timer = setInterval(() => show((i + 1) % cards.length), 4000); }
+    dots.forEach((d, k) => d.addEventListener("click", () => { clearInterval(timer); show(k); }));
+    const wrap = document.querySelector(".mock-wrap");
+    wrap.addEventListener("mouseenter", () => clearInterval(timer));
+    wrap.addEventListener("mouseleave", () => { clearInterval(timer); start(); });
+    start();
+  })();
 
   // Paste your form endpoint here (e.g. Formspree: https://formspree.io/f/xxxx).
   // Leave empty to show a fallback message.
-  const FORM_ENDPOINT = "https://formspree.io/f/mppdlbwr";
+  const FORM_ENDPOINT = "";
 
   const form = document.getElementById("waitlist");
   const status = document.getElementById("status");
@@ -498,11 +633,11 @@
 
     if (!FORM_ENDPOINT) {
       status.className = "status err";
-      status.textContent = "The waitlist isn't connected yet. Email admin@hustlo.in to join.";
+      status.textContent = "The waitlist isn't connected yet. Email hello@hustlo.in to join.";
       return;
     }
 
-    const btn = form.querySelector("button");
+    const btn = form.querySelector("button[type=submit]");
     btn.disabled = true;
     btn.textContent = "Joining…";
     try {
@@ -516,7 +651,7 @@
       document.getElementById("thanks").style.display = "block";
     } catch (err) {
       status.className = "status err";
-      status.textContent = "Something went wrong. Please try again, or email admin@hustlo.in.";
+      status.textContent = "Something went wrong. Please try again, or email hello@hustlo.in.";
       btn.disabled = false;
       btn.textContent = "Join the waitlist";
     }

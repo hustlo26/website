@@ -155,11 +155,24 @@
   label{display:block;font-weight:600;font-size:14px;margin-bottom:6px}
   label .opt{font-weight:400;color:var(--muted)}
   input,select{width:100%;min-height:48px;padding:0 14px;border:1.5px solid #CFCCC3;border-radius:10px;font:16px Inter,sans-serif;color:var(--ink);background:var(--white)}
+  input::placeholder{color:#8A90A0;opacity:1}
+  select:has(option[value=""]:checked){color:#8A90A0}
+  select option{color:var(--ink)}
   input:focus,select:focus{border-color:var(--navy);outline:none;box-shadow:0 0 0 3px rgba(255,90,31,.25)}
   form .btn{width:100%}
   .fine{font-size:13px;color:var(--muted)}
   .status{font-size:15px;font-weight:500;min-height:1px}
   .status.err{color:#B3261E}
+  input[aria-invalid="true"],select[aria-invalid="true"]{border-color:#B3261E}
+  input[aria-invalid="true"]:focus,select[aria-invalid="true"]:focus{box-shadow:0 0 0 3px rgba(179,38,30,.18)}
+  .err-msg{color:#B3261E;font-size:13px;font-weight:500;margin-top:6px;line-height:1.4}
+  .err-msg:empty{display:none}
+  .phone{display:flex}
+  .phone span{display:grid;place-items:center;padding:0 12px;border:1.5px solid #CFCCC3;border-right:0;border-radius:10px 0 0 10px;background:var(--paper);color:var(--muted);font-weight:500}
+  .phone input{border-radius:0 10px 10px 0;min-width:0}
+  .phone:has([aria-invalid="true"]) span{border-color:#B3261E}
+  label.check-row{display:flex;align-items:center;gap:10px;margin:10px 0 0;font-weight:500;cursor:pointer}
+  .check-row input{width:18px;height:18px;min-height:0;padding:0;margin:0;flex:none;accent-color:var(--orange);cursor:pointer}
   .thanks{display:none;text-align:center;padding:24px 8px}
   .thanks h3{font-size:26px;margin-bottom:10px}
   .thanks p{color:var(--muted)}
@@ -698,22 +711,44 @@
           <div class="two">
             <div>
               <label for="name">Your name</label>
-              <input id="name" name="name" autocomplete="name" required>
+              <input id="name" name="name" autocomplete="name" placeholder="e.g. Priya Sharma" required aria-describedby="name-err">
+              <p class="err-msg" id="name-err"></p>
             </div>
             <div>
               <label for="email">Email</label>
-              <input id="email" name="email" type="email" autocomplete="email" required>
+              <input id="email" name="email" type="email" autocomplete="email" placeholder="e.g. priya@gmail.com" required aria-describedby="email-err">
+              <p class="err-msg" id="email-err"></p>
+            </div>
+          </div>
+          <div class="two" style="margin-top:18px">
+            <div>
+              <label for="phone">Phone number</label>
+              <div class="phone">
+                <span aria-hidden="true">+91</span>
+                <input id="phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="98765 43210" maxlength="14" required aria-describedby="phone-err">
+              </div>
+              <p class="err-msg" id="phone-err"></p>
+              <label class="check-row"><input type="checkbox" id="wa-same" checked> This is my WhatsApp number too</label>
+            </div>
+            <div id="wa-wrap" hidden>
+              <label for="whatsapp">WhatsApp number</label>
+              <div class="phone">
+                <span aria-hidden="true">+91</span>
+                <input id="whatsapp" name="whatsapp" type="tel" inputmode="numeric" placeholder="98765 43210" maxlength="14" aria-describedby="whatsapp-err">
+              </div>
+              <p class="err-msg" id="whatsapp-err"></p>
             </div>
           </div>
           <div class="two" style="margin-top:18px">
             <div>
               <label for="instagram">Instagram handle</label>
-              <input id="instagram" name="instagram" placeholder="@yourhandle" required>
+              <input id="instagram" name="instagram" placeholder="e.g. @priya.creates" autocapitalize="none" spellcheck="false" required aria-describedby="instagram-err">
+              <p class="err-msg" id="instagram-err"></p>
             </div>
             <div>
               <label for="niche">Your niche</label>
-              <select id="niche" name="niche" required>
-                <option value="">Choose one</option>
+              <select id="niche" name="niche" required aria-describedby="niche-err">
+                <option value="">Select your niche</option>
                 <option>Fashion &amp; beauty</option>
                 <option>Tech &amp; gadgets</option>
                 <option>Food</option>
@@ -729,17 +764,19 @@
                 <option>Talent manager / agency</option>
                 <option>Other</option>
               </select>
+              <p class="err-msg" id="niche-err"></p>
             </div>
           </div>
           <div style="margin-top:18px">
             <label for="volume">Collab enquiries per month <span class="opt">(roughly)</span></label>
-            <select id="volume" name="volume" required>
-              <option value="">Choose one</option>
+            <select id="volume" name="volume" required aria-describedby="volume-err">
+              <option value="">Select a range</option>
               <option>Fewer than 5</option>
               <option>5–15</option>
               <option>15–30</option>
               <option>More than 30</option>
             </select>
+            <p class="err-msg" id="volume-err"></p>
           </div>
           <button class="btn btn-primary" type="submit" style="margin-top:22px">Join the waitlist</button>
           <p class="fine" style="margin-top:12px">We'll only email you about Hustlo early access. No spam, and you can opt out anytime.</p>
@@ -1013,29 +1050,99 @@
   const form = document.getElementById("waitlist");
   const status = document.getElementById("status");
 
+  const waSame = document.getElementById("wa-same");
+  const waWrap = document.getElementById("wa-wrap");
+
+  // Indian mobile: accepts spaces, dashes, +91 or leading 0. Returns 10 digits or null.
+  function mobileDigits(v) {
+    let d = v.replace(/\D/g, "");
+    if (d.length === 12 && d.startsWith("91")) d = d.slice(2);
+    else if (d.length === 11 && d.startsWith("0")) d = d.slice(1);
+    return d;
+  }
+  function phoneError(v, what) {
+    if (!v.trim()) return `Please enter your ${what}.`;
+    const d = mobileDigits(v);
+    if (d.length !== 10) return `Enter a 10-digit mobile number (you entered ${d.length} digit${d.length === 1 ? "" : "s"}).`;
+    if (!/^[6-9]/.test(d)) return "Indian mobile numbers start with 6, 7, 8 or 9.";
+    return "";
+  }
+  // Strips @, spaces and instagram.com links down to the bare handle.
+  function cleanHandle(v) {
+    return v.trim().replace(/^https?:\/\/(www\.)?instagram\.com\//i, "").replace(/[/?#].*$/, "").replace(/^@/, "");
+  }
+
+  const rules = {
+    name: v => v.trim().length < 2 ? "Please enter your name." : "",
+    email: v => {
+      if (!v.trim()) return "Please enter your email address.";
+      if (!/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(v.trim())) return "That email doesn't look right. It should look like name@gmail.com.";
+      return "";
+    },
+    phone: v => phoneError(v, "phone number"),
+    whatsapp: v => waSame.checked ? "" : phoneError(v, "WhatsApp number"),
+    instagram: v => {
+      const h = cleanHandle(v);
+      if (!h) return "Please enter your Instagram handle.";
+      if (!/^[A-Za-z0-9._]{1,30}$/.test(h)) return "Handles can only use letters, numbers, dots and underscores (max 30).";
+      if (h.startsWith(".") || h.endsWith(".") || h.includes("..")) return "Handles can't start or end with a dot, or have two dots in a row.";
+      return "";
+    },
+    niche: v => v ? "" : "Please choose your niche.",
+    volume: v => v ? "" : "Please choose a rough number."
+  };
+
+  function check(id) {
+    const el = document.getElementById(id);
+    const msg = rules[id](el.value);
+    document.getElementById(id + "-err").textContent = msg;
+    if (msg) el.setAttribute("aria-invalid", "true"); else el.removeAttribute("aria-invalid");
+    return !msg;
+  }
+
+  // Check a field when the user leaves it; once it has shown an error, re-check as they type.
+  Object.keys(rules).forEach(id => {
+    const el = document.getElementById(id);
+    el.addEventListener("blur", () => { if (el.value) check(id); });
+    el.addEventListener(el.tagName === "SELECT" ? "change" : "input", () => {
+      if (el.getAttribute("aria-invalid") === "true") check(id);
+    });
+  });
+
+  waSame.addEventListener("change", () => {
+    waWrap.hidden = waSame.checked;
+    if (waSame.checked) check("whatsapp"); else document.getElementById("whatsapp").focus();
+  });
+
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     status.className = "status";
     status.textContent = "";
 
-    const data = Object.fromEntries(new FormData(form));
-    const missing = ["name","email","instagram","niche","volume"].filter(k => !String(data[k] || "").trim());
-    if (missing.length) {
+    const bad = Object.keys(rules).filter(id => !check(id));
+    if (bad.length) {
       status.className = "status err";
-      status.textContent = "Please fill in all the fields.";
-      document.getElementById(missing[0]).focus();
-      return;
-    }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
-      status.className = "status err";
-      status.textContent = "Please enter a valid email address.";
-      document.getElementById("email").focus();
+      status.textContent = bad.length === 1 ? "Please fix the highlighted field above." : `Please fix the ${bad.length} highlighted fields above.`;
+      document.getElementById(bad[0]).focus();
       return;
     }
 
+    const raw = Object.fromEntries(new FormData(form));
+    const phone = "+91" + mobileDigits(raw.phone);
+    const data = {
+      name: raw.name.trim(),
+      email: raw.email.trim(),
+      phone,
+      whatsapp: waSame.checked ? phone : "+91" + mobileDigits(raw.whatsapp),
+      whatsapp_same_as_phone: waSame.checked ? "Yes" : "No",
+      instagram: "@" + cleanHandle(raw.instagram),
+      niche: raw.niche,
+      volume: raw.volume
+    };
+
     if (!FORM_ENDPOINT) {
       status.className = "status err";
-      status.textContent = "The waitlist isn't connected yet. Email hello@hustlo.in to join.";
+      status.textContent = "The waitlist isn't connected yet. Email admin@hustlo.in to join.";
       return;
     }
 
@@ -1053,7 +1160,9 @@
       document.getElementById("thanks").style.display = "block";
     } catch (err) {
       status.className = "status err";
-      status.textContent = "Something went wrong. Please try again, or email hello@hustlo.in.";
+      status.textContent = navigator.onLine
+        ? "We couldn't save your details just now. Please try again in a moment, or email admin@hustlo.in."
+        : "You seem to be offline. Check your internet connection and try again.";
       btn.disabled = false;
       btn.textContent = "Join the waitlist";
     }

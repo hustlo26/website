@@ -52,7 +52,14 @@
   .hero h1 em{font-style:normal;color:var(--orange)}
   .hero .lead{font-size:19px;color:var(--on-dark);margin:22px 0 32px;max-width:560px}
   .hero .ctas{display:flex;gap:14px;flex-wrap:wrap}
-  .hero .note{margin-top:18px;font-size:14px;color:#A4ACBB}
+  .hero-note{margin-top:20px;font-size:15px;color:#A4ACBB;display:flex;align-items:center;flex-wrap:wrap;gap:4px 6px}
+  .hero-note .rotator{color:var(--white);font-weight:600}
+  .hero-note .caret{display:inline-block;width:2px;height:1.05em;background:var(--orange);margin-left:2px;vertical-align:-2px;animation:blink 1s steps(1) infinite}
+  @keyframes blink{50%{opacity:0}}
+  .live-dot{width:8px;height:8px;border-radius:50%;background:#3DDC84;margin-right:4px;box-shadow:0 0 0 0 rgba(61,220,132,.6);animation:ping 2s infinite}
+  @keyframes ping{0%{box-shadow:0 0 0 0 rgba(61,220,132,.55)}70%{box-shadow:0 0 0 8px rgba(61,220,132,0)}100%{box-shadow:0 0 0 0 rgba(61,220,132,0)}}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  @media (prefers-reduced-motion:reduce){.hero-note .caret,.live-dot{animation:none}}
 
   /* Rotating example cards */
   .mock-wrap{position:relative}
@@ -201,6 +208,161 @@
   .mail p{font-size:15px;color:var(--muted)}
   @media (max-width:960px){.niches{grid-template-columns:repeat(2,1fr)}}
   @media (max-width:640px){.niches,.auto{grid-template-columns:1fr}}
+  /* ===== Interactive sections ===== */
+  .center{text-align:center;margin-left:auto;margin-right:auto}
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
+  .tag{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px}
+  .tag.auto{background:#E4F3EA;color:#17663A}
+  .tag.you{background:#FFE8DF;color:var(--orange-dark)}
+  .tag.soon2{background:#EEF0F4;color:var(--muted)}
+
+  /* Before / after */
+  .ba-toggle{display:inline-flex;background:var(--white);border:1px solid var(--line);border-radius:999px;padding:4px;margin:0 auto 28px}
+  .ba-toggle button{min-height:44px;padding:0 20px;border:0;border-radius:999px;background:transparent;font:600 15px Inter,sans-serif;color:var(--muted);cursor:pointer}
+  .ba-toggle button[aria-pressed="true"]{background:var(--navy);color:var(--white)}
+  .ba-wrap{text-align:center}
+  .ba-stage{position:relative;background:var(--white);border:1px solid var(--line);border-radius:20px;padding:28px;min-height:360px;text-align:left}
+  .ba-panel[hidden]{display:none}
+  .mess{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .note{border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:var(--paper);box-shadow:0 6px 16px rgba(18,24,38,.06);animation:wobble 4s ease-in-out infinite}
+  .note:nth-child(1){transform:rotate(-2deg)} .note:nth-child(2){transform:rotate(1.5deg);animation-delay:.6s} .note:nth-child(3){transform:rotate(-1deg);animation-delay:1.2s}
+  .note:nth-child(4){transform:rotate(2deg);animation-delay:.3s} .note:nth-child(5){transform:rotate(-1.5deg);animation-delay:.9s} .note:nth-child(6){transform:rotate(1deg);animation-delay:1.5s}
+  @keyframes wobble{0%,100%{translate:0 0}50%{translate:0 -4px}}
+  .note .src{font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+  .note .msg{margin-top:6px;font-weight:500}
+  .note .meta{margin-top:6px;font-size:13px;color:#B3261E}
+  .ba-caption{margin-top:22px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+  .ba-caption span{font-size:14px;font-weight:600;padding:8px 14px;border-radius:999px}
+  .bad span{background:#FDECEA;color:#9B1C14}
+  .good span{background:#E4F3EA;color:#17663A}
+  .board{display:grid;grid-template-columns:repeat(5,minmax(170px,1fr));gap:12px;overflow-x:auto;padding-bottom:4px}
+  .col{background:var(--paper);border-radius:12px;padding:12px;min-height:250px}
+  .col h3{font-size:13px;font-family:Inter,sans-serif;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;display:flex;justify-content:space-between;margin-bottom:10px}
+  .card{background:var(--white);border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-bottom:10px;font-size:13px;transition:transform .15s,box-shadow .15s}
+  .card:hover{transform:translateY(-2px);box-shadow:0 8px 18px rgba(18,24,38,.08)}
+  .card b{display:block;font-size:14px;overflow-wrap:anywhere}
+  .card span{color:var(--muted)}
+  .card .tag{display:flex;width:fit-content;margin-top:8px;font-size:11px;padding:3px 8px}
+  .card > span{display:block}
+  .ba-panel.show{animation:fadein .45s ease}
+  @keyframes fadein{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+  /* Stepper */
+  .st-tabs{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:8px}
+  .st-tabs button{min-height:64px;border:1px solid var(--line);background:var(--white);border-radius:12px;cursor:pointer;font:600 14px Inter,sans-serif;color:var(--muted);text-align:left;padding:10px 12px;display:flex;flex-direction:column;gap:2px}
+  .st-tabs button small{font:700 12px "Space Grotesk";color:var(--muted)}
+  .st-tabs button[aria-selected="true"]{border-color:var(--navy);background:var(--navy);color:var(--white)}
+  .st-tabs button[aria-selected="true"] small{color:var(--orange)}
+  .st-progress{height:4px;background:var(--line);border-radius:99px;overflow:hidden;margin-bottom:24px}
+  .st-progress i{display:block;height:100%;width:0;background:var(--orange)}
+  .st-panel{display:grid;grid-template-columns:.9fr 1.1fr;gap:40px;align-items:center;background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:36px}
+  .st-panel[hidden]{display:none}
+  .st-panel.show{animation:fadein .45s ease}
+  .st-panel h3{font-size:28px;margin:14px 0 10px}
+  .st-panel p{color:var(--muted);font-size:17px}
+  .ui{background:var(--white);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:0 18px 40px rgba(18,24,38,.08);font-size:14px}
+  .ui-title{font-family:"Space Grotesk";font-weight:700;font-size:15px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+  .field{border:1px solid var(--line);border-radius:8px;padding:8px 12px;margin-bottom:8px;display:flex;justify-content:space-between;gap:12px}
+  .field span{color:var(--muted)}
+  .check{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--line)}
+  .check:last-of-type{border-bottom:0}
+  .tick{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:#E4F3EA;color:#17663A;flex:none}
+  .tick svg{width:14px;height:14px}
+  .tick.wait{background:#FFF1E0;color:#A35200}
+  .show .check,.show .field,.show .bubble,.show .slot{animation:pop .4s ease both}
+  .show .check:nth-child(2),.show .field:nth-child(2){animation-delay:.12s}
+  .show .check:nth-child(3),.show .field:nth-child(3){animation-delay:.24s}
+  .show .check:nth-child(4),.show .field:nth-child(4){animation-delay:.36s}
+  .show .check:nth-child(5),.show .field:nth-child(5){animation-delay:.48s}
+  @keyframes pop{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .qline{display:flex;justify-content:space-between;padding:6px 0}
+  .qline.total{border-top:1px solid var(--line);margin-top:4px;padding-top:10px;font-weight:700}
+  .bubble{max-width:86%;padding:10px 14px;border-radius:14px;margin-top:10px}
+  .bubble.them{background:#EEF0F4}
+  .bubble.me{background:#FFE8DF;margin-left:auto}
+  .bubble small{display:block;font-size:11px;color:var(--muted);margin-top:4px}
+  .slots{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+  .slot{border:1px solid var(--line);border-radius:8px;padding:10px;text-align:center;font-weight:600}
+  .slot.on{background:var(--navy);color:var(--white);border-color:var(--navy)}
+  .paybar{height:10px;background:#EEF0F4;border-radius:99px;overflow:hidden;margin:10px 0 6px}
+  .paybar i{display:block;height:100%;background:var(--orange);width:50%;transition:width 1.2s ease}
+  .show .paybar i{width:100%}
+
+  /* Email preview */
+  .em{display:grid;grid-template-columns:.8fr 1.2fr;gap:24px;align-items:start}
+  .em-list{display:grid;gap:8px}
+  .em-list button{min-height:56px;text-align:left;padding:12px 16px;border:1px solid var(--line);background:var(--white);border-radius:12px;cursor:pointer;font:600 15px Inter,sans-serif;color:var(--ink);display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .em-list button small{font-weight:500;font-size:12px;color:var(--muted)}
+  .em-list button[aria-selected="true"]{border-color:var(--orange);box-shadow:0 0 0 3px rgba(255,90,31,.18)}
+  .mail-win{background:var(--white);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 18px 40px rgba(18,24,38,.08)}
+  .mail-bar{display:flex;gap:6px;padding:12px 16px;background:var(--paper);border-bottom:1px solid var(--line)}
+  .mail-bar i{width:10px;height:10px;border-radius:50%;background:#D9D6CE}
+  .mail-head{padding:16px 22px;border-bottom:1px solid var(--line);font-size:14px;display:grid;gap:4px}
+  .mail-head span{color:var(--muted)}
+  .mail-head .subj{font:700 18px "Space Grotesk";color:var(--ink);margin-top:6px}
+  .mail-body{padding:20px 22px;font-size:15px;line-height:1.7;min-height:200px}
+  .mail-body p+p{margin-top:10px}
+  .mail-foot{padding:14px 22px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+  .mail-win.show .mail-body{animation:fadein .4s ease}
+
+  /* Quote builder */
+  .qb{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
+  .qb-controls{background:var(--white);border:1px solid var(--line);border-radius:20px;padding:24px}
+  .qrow{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+  .qrow:last-child{border-bottom:0}
+  .qrow .lbl b{display:block}
+  .qrow label{font-size:16px;margin:0}
+  .qrow .lbl span{font-size:13px;color:var(--muted)}
+  .stepper{display:flex;align-items:center;gap:6px}
+  .stepper button{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--paper);font:700 20px Inter;cursor:pointer;color:var(--ink)}
+  .stepper button:hover{border-color:var(--navy)}
+  .stepper output{min-width:28px;text-align:center;font:700 18px "Space Grotesk"}
+  .switch{position:relative;width:52px;height:30px;flex:none}
+  .switch input{position:absolute;inset:0;opacity:0;width:100%;height:100%;margin:0;cursor:pointer;min-height:0}
+  .switch span{position:absolute;inset:0;background:#D9D6CE;border-radius:99px;transition:background .2s;pointer-events:none}
+  .switch span::after{content:"";position:absolute;width:24px;height:24px;left:3px;top:3px;border-radius:50%;background:var(--white);transition:transform .2s}
+  .switch input:checked+span{background:var(--orange)}
+  .switch input:checked+span::after{transform:translateX(22px)}
+  .switch input:focus-visible+span{outline:3px solid var(--orange);outline-offset:3px}
+  input[type=range]{width:180px;min-height:0;padding:0;border:0;accent-color:var(--orange)}
+  .qb-quote{background:var(--navy);color:var(--white);border-radius:20px;padding:28px;position:sticky;top:24px}
+  .qb-quote .ql{display:flex;justify-content:space-between;padding:8px 0;color:var(--on-dark);font-size:15px}
+  .qb-quote .ql b{color:var(--white);font-weight:600}
+  .qb-quote .qtotal{border-top:1px solid #2C3650;margin-top:8px;padding-top:14px;font:700 34px "Space Grotesk";color:var(--white);display:flex;justify-content:space-between;align-items:baseline}
+  .qb-quote .qtotal small{font:500 14px Inter;color:var(--on-dark)}
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+  .split div{background:var(--navy-2);border:1px solid #2C3650;border-radius:12px;padding:12px}
+  .split small{display:block;color:var(--on-dark);font-size:12px}
+  .split b{font:700 20px "Space Grotesk"}
+  .qb-note{margin-top:16px;font-size:13px;color:#A4ACBB}
+  .qb-msg{margin-top:12px;font-size:14px;color:#7FE0A8;min-height:20px}
+
+  /* Creator chips */
+  .chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+  .chips button{min-height:44px;padding:0 18px;border-radius:999px;border:1px solid var(--line);background:var(--white);font:500 15px Inter,sans-serif;color:var(--ink);cursor:pointer;transition:all .15s}
+  .chips button:hover{border-color:var(--navy)}
+  .chips button[aria-pressed="true"]{background:var(--navy);color:var(--white);border-color:var(--navy)}
+  .chip-out{max-width:620px;margin:28px auto 0;background:var(--white);border:1px dashed #CFCCC3;border-radius:16px;padding:20px 24px;text-align:center;font-size:17px}
+  .chip-out b{color:var(--orange-dark)}
+
+  @media (max-width:960px){
+    .st-tabs{grid-template-columns:repeat(3,1fr)}
+    .st-panel,.em,.qb{grid-template-columns:1fr}
+    .mess{grid-template-columns:1fr 1fr}
+    .qb-quote{position:static}
+  }
+  @media (max-width:640px){
+    .st-tabs{grid-template-columns:repeat(2,1fr)}
+    .st-panel{padding:22px}
+    .mess{grid-template-columns:1fr}
+    .ba-stage{padding:18px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .reveal{opacity:1;transform:none}
+    .note,.show .check,.show .field,.show .bubble,.show .slot,.ba-panel.show,.st-panel.show,.mail-win.show .mail-body{animation:none}
+    .paybar i{transition:none}
+  }
   .to-top{position:fixed;right:20px;bottom:20px;width:48px;height:48px;border-radius:50%;border:0;background:var(--orange);color:var(--navy);display:grid;place-items:center;cursor:pointer;box-shadow:0 8px 24px rgba(18,24,38,.25);opacity:0;visibility:hidden;transform:translateY(12px);transition:opacity .2s,transform .2s,visibility .2s;z-index:20}
   .to-top.show{opacity:1;visibility:visible;transform:none}
   .to-top:hover{background:#FF7440}
@@ -218,7 +380,7 @@
       <nav aria-label="Main">
         <a class="link" href="#how">How it works</a>
         <a class="link" href="#automation">Automation</a>
-        <a class="link" href="#creators">Creators</a>
+        <a class="link" href="#try">Try it</a>
         <a class="link" href="#faq">FAQ</a>
         <a class="btn btn-primary" href="#join">Join waitlist</a>
       </nav>
@@ -235,13 +397,13 @@
           <a class="btn btn-primary" href="#join">Get early access</a>
           <a class="btn btn-ghost" href="#how">See how it works</a>
         </div>
-        <p class="note">For creators of every niche. Early access opens to a small group first.</p>
+        <p class="hero-note"><span class="live-dot" aria-hidden="true"></span><span class="sr-only">For creators of every niche. </span><span aria-hidden="true">For <span class="rotator" id="niche-rotator">fashion</span><span class="caret"></span> creators.</span> Early access opens to a small group first.</p>
       </div>
 
       <div class="mock-wrap">
         <div class="mock" data-card role="group" aria-label="Example: confirmed campaign">
-          <div class="mock-type">Confirmed collaboration</div>
-          <div class="mock-top"><b>Fashion Product campaign: 2 reels </b></div>
+          <div class="mock-type">Confirmed campaign</div>
+          <div class="mock-top"><b>Festive campaign: 2 reels + 3 stories</b></div>
           <div class="row"><span>Brand</span><strong>@ethnicwear.example</strong></div>
           <div class="row"><span>Quote</span><span class="pill ok">Accepted</span></div>
           <div class="row"><span>Call</span><strong>Booked for [DATE]</strong></div>
@@ -288,32 +450,49 @@
 
 <main id="main">
 
-  <section>
-    <div class="wrap">
-      <div class="head">
-        <h2>Getting collabs is the fun part. Managing them isn't.</h2>
-        <p>Most creators run collabs from DMs, email threads and a spreadsheet. Here's what that costs.</p>
+  <section id="problem">
+    <div class="wrap ba-wrap">
+      <div class="head center reveal">
+        <h2>From scattered DMs to one clear view</h2>
+        <p>Flip the switch and see the difference.</p>
       </div>
-      <div class="pains">
-        <div class="pain">
-          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16v16H4z"/><path d="M22 6l-10 7L2 6"/></svg></div>
-          <h3>Endless emails</h3>
-          <p>Rate cards, quotes, follow-ups and "just checking in" mails, written by hand every time.</p>
+      <div class="ba-toggle" role="group" aria-label="Compare managing collabs with and without Hustlo">
+        <button type="button" data-ba="before" aria-pressed="true">Without Hustlo</button>
+        <button type="button" data-ba="after" aria-pressed="false">With Hustlo</button>
+      </div>
+      <div class="ba-stage reveal">
+        <div class="ba-panel" id="ba-before">
+          <div class="mess">
+            <div class="note"><div class="src">Instagram DM</div><div class="msg">"Hey! What are your rates for 2 reels?"</div><div class="meta">Unread for 3 days</div></div>
+            <div class="note"><div class="src">Email</div><div class="msg">Re: Re: Re: Campaign brief</div><div class="meta">14 messages, still no decision</div></div>
+            <div class="note"><div class="src">Spreadsheet</div><div class="msg">Balance paid? "check with brand"</div><div class="meta">Last updated 2 weeks ago</div></div>
+            <div class="note"><div class="src">WhatsApp</div><div class="msg">"Can we hop on a call today?"</div><div class="meta">Before agreeing to your price</div></div>
+            <div class="note"><div class="src">Email you sent</div><div class="msg">"Just following up on the payment…"</div><div class="meta">Second reminder, no reply</div></div>
+            <div class="note"><div class="src">Notes app</div><div class="msg">Send quote to @gadgets by Friday??</div><div class="meta">Missed</div></div>
+          </div>
+          <div class="ba-caption bad"><span>5 apps</span><span>No overview</span><span>Payments chased by hand</span></div>
         </div>
-        <div class="pain">
-          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
-          <h3>Draining negotiations</h3>
-          <p>Low-budget and barter offers eat hours, and you second-guess every counter-offer.</p>
-        </div>
-        <div class="pain">
-          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
-          <h3>Calls that go nowhere</h3>
-          <p>Meetings get booked before the other side has even agreed to your price.</p>
-        </div>
-        <div class="pain">
-          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v20M17 6H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
-          <h3>Payments slip</h3>
-          <p>Balances get forgotten, and chasing people for money feels awkward.</p>
+        <div class="ba-panel" id="ba-after" hidden>
+          <div class="board">
+            <div class="col"><h3>New <span>2</span></h3>
+              <div class="card"><b>@glowskin.example</b><span>2 reels + 1 story</span><div class="tag auto">Quote sent</div></div>
+              <div class="card"><b>@studio.example</b><span>Paid feature</span><div class="tag auto">Screened: qualified</div></div>
+            </div>
+            <div class="col"><h3>Negotiating <span>1</span></h3>
+              <div class="card"><b>@gadgets.example</b><span>1 launch video</span><div class="tag auto">Follow-up in 2 days</div></div>
+            </div>
+            <div class="col"><h3>Confirmed <span>1</span></h3>
+              <div class="card"><b>@cafe.example</b><span>1 reel</span><div class="tag auto">Call booked</div></div>
+            </div>
+            <div class="col"><h3>Live <span>1</span></h3>
+              <div class="card"><b>@ethnicwear.example</b><span>Festive campaign</span><div class="tag auto">Balance reminder sent</div></div>
+            </div>
+            <div class="col"><h3>Paid <span>2</span></h3>
+              <div class="card"><b>@app.example</b><span>3 stories</span><div class="tag auto">Paid in full</div></div>
+              <div class="card"><b>@books.example</b><span>Reel + post</span><div class="tag you">Repeat client</div></div>
+            </div>
+          </div>
+          <div class="ba-caption good"><span>One place</span><span>Automatic follow-ups</span><span>Every payment tracked</span></div>
         </div>
       </div>
     </div>
@@ -321,125 +500,161 @@
 
   <section class="who" id="how">
     <div class="wrap">
-      <div class="head">
-        <h2>How a collab runs on Hustlo</h2>
-        <p>From the first message to the next repeat collab, every step is tracked and the repetitive parts happen automatically.</p>
+      <div class="head reveal">
+        <h2>Watch a collab run, step by step</h2>
+        <p>Click any step, or let it play.</p>
       </div>
-      <ol class="steps">
-        <li><h3>Collab request</h3><p>Brands, businesses or other creators fill your collab form, linked from your bio or email.</p></li>
-        <li><h3>Screened</h3><p>Your rules check budget, deliverables and timeline.</p></li>
-        <li><h3>Quote &amp; negotiate</h3><p>Your rates go out in a branded quote. Counter-offers follow your rules.</p></li>
-        <li><h3>Meeting</h3><p>A call link is offered only after your terms are accepted.</p></li>
-        <li><h3>Create &amp; go live</h3><p>Track deliverables, approvals and go-live dates.</p></li>
-        <li><h3>Get paid &amp; rebook</h3><p>Automatic reminders, then offers that bring clients back.</p></li>
-      </ol>
+      <div class="st reveal">
+        <div class="st-tabs" role="tablist" aria-label="Collab steps">
+          <button type="button" role="tab" id="st-t1" aria-controls="st-p1" aria-selected="true"><small>01</small>Request</button>
+          <button type="button" role="tab" id="st-t2" aria-controls="st-p2" aria-selected="false" tabindex="-1"><small>02</small>Screen</button>
+          <button type="button" role="tab" id="st-t3" aria-controls="st-p3" aria-selected="false" tabindex="-1"><small>03</small>Quote</button>
+          <button type="button" role="tab" id="st-t4" aria-controls="st-p4" aria-selected="false" tabindex="-1"><small>04</small>Meeting</button>
+          <button type="button" role="tab" id="st-t5" aria-controls="st-p5" aria-selected="false" tabindex="-1"><small>05</small>Go live</button>
+          <button type="button" role="tab" id="st-t6" aria-controls="st-p6" aria-selected="false" tabindex="-1"><small>06</small>Get paid</button>
+        </div>
+        <div class="st-progress" aria-hidden="true"><i></i></div>
+
+        <div class="st-panel show" role="tabpanel" id="st-p1" aria-labelledby="st-t1">
+          <div><span class="tag auto">Automatic</span><h3>A brand sends a request</h3><p>They fill your collab form from your bio link. Every request lands in one place with an ID, not lost in DMs.</p></div>
+          <div class="ui"><div class="ui-title">New collab request <span class="tag auto">Just now</span></div>
+            <div class="field"><span>Brand</span><b>@glowskin.example</b></div>
+            <div class="field"><span>Deliverables</span><b>2 reels + 1 story</b></div>
+            <div class="field"><span>Budget</span><b>₹20,000–25,000</b></div>
+            <div class="field"><span>Go-live</span><b>In 2 weeks</b></div>
+          </div>
+        </div>
+        <div class="st-panel" role="tabpanel" id="st-p2" aria-labelledby="st-t2" hidden>
+          <div><span class="tag auto">Automatic</span><h3>Your rules screen it</h3><p>Budget, deliverables and timeline are checked against your rules in seconds. Low-budget and barter-only offers never eat your time.</p></div>
+          <div class="ui"><div class="ui-title">Screening <span class="tag auto">Qualified</span></div>
+            <div class="check"><span class="tick">✓</span>Budget is above your minimum</div>
+            <div class="check"><span class="tick">✓</span>You offer reels and stories</div>
+            <div class="check"><span class="tick">✓</span>Timeline fits your calendar</div>
+          </div>
+        </div>
+        <div class="st-panel" role="tabpanel" id="st-p3" aria-labelledby="st-t3" hidden>
+          <div><span class="tag auto">Automatic, within your limits</span><h3>Quote and negotiate</h3><p>Your rate card turns into a branded quote. Counter-offers stay above your floor; anything lower waits for you.</p></div>
+          <div class="ui"><div class="ui-title">Quote #1042</div>
+            <div class="qline"><span>Reel × 2</span><b>₹16,000</b></div>
+            <div class="qline"><span>Story × 1</span><b>₹4,000</b></div>
+            <div class="qline total"><span>Total</span><b>₹20,000</b></div>
+            <div class="bubble them">"Can you do ₹15,000?"<small>@glowskin.example</small></div>
+            <div class="bubble me">"The best I can do is ₹18,000 for this package."<small>Within your limit · sent automatically</small></div>
+          </div>
+        </div>
+        <div class="st-panel" role="tabpanel" id="st-p4" aria-labelledby="st-t4" hidden>
+          <div><span class="tag auto">Automatic</span><h3>The meeting books itself</h3><p>Your booking link appears only after the quote is accepted. No calls with brands that haven't agreed to your price.</p></div>
+          <div class="ui"><div class="ui-title">Pick a time <span class="tag auto">Quote accepted</span></div>
+            <div class="slots"><div class="slot">11:00</div><div class="slot on">2:30</div><div class="slot">5:00</div></div>
+            <div class="check" style="margin-top:12px"><span class="tick">✓</span>Call booked · invite sent to both</div>
+          </div>
+        </div>
+        <div class="st-panel" role="tabpanel" id="st-p5" aria-labelledby="st-t5" hidden>
+          <div><span class="tag you">You create</span><h3>Create and go live</h3><p>Every deliverable, approval and posting date in one checklist, so nothing slips.</p></div>
+          <div class="ui"><div class="ui-title">Deliverables</div>
+            <div class="check"><span class="tick">✓</span>Brief received</div>
+            <div class="check"><span class="tick">✓</span>Script approved</div>
+            <div class="check"><span class="tick">✓</span>Reels shot</div>
+            <div class="check"><span class="tick wait">…</span>Brand approval in progress</div>
+            <div class="check"><span class="tick wait">…</span>Go-live date set</div>
+          </div>
+        </div>
+        <div class="st-panel" role="tabpanel" id="st-p6" aria-labelledby="st-t6" hidden>
+          <div><span class="tag auto">Automatic</span><h3>Get paid, then rebook</h3><p>Advance and balance reminders go out for you. When the collab closes, a loyalty offer brings the brand back.</p></div>
+          <div class="ui"><div class="ui-title">Payment <span class="tag auto">Paid in full</span></div>
+            <div class="paybar"><i></i></div>
+            <div class="qline"><span>Advance (50%)</span><b>Received</b></div>
+            <div class="qline"><span>Balance (50%)</span><b>Received after 1 reminder</b></div>
+            <div class="bubble me">Loyalty offer: 10% off your next campaign<small>Ready to send</small></div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
   <section id="automation">
     <div class="wrap">
-      <div class="head">
-        <h2>The busywork that happens without you</h2>
-        <p>Set your rates, rules and templates once. Hustlo sends the right email at the right moment, and you can review anything before it goes.</p>
+      <div class="head reveal">
+        <h2>Emails that send themselves</h2>
+        <p>Pick a moment to see what goes out. You write the templates once and can review anything before it sends.</p>
       </div>
-      <div class="auto">
-        <div class="mail">
-          <span class="when">When a collab request arrives</span>
-          <h3>Instant reply with your rates</h3>
-          <p>A professional acknowledgement and your quote, so they hear back in minutes, not days.</p>
+      <div class="em reveal">
+        <div class="em-list" role="tablist" aria-label="Automated emails" aria-orientation="vertical">
+          <button type="button" role="tab" data-em="0" aria-selected="true">When a request arrives <small>Instant</small></button>
+          <button type="button" role="tab" data-em="1" aria-selected="false" tabindex="-1">When they go quiet <small>After 3 days</small></button>
+          <button type="button" role="tab" data-em="2" aria-selected="false" tabindex="-1">When they negotiate <small>Your limits</small></button>
+          <button type="button" role="tab" data-em="3" aria-selected="false" tabindex="-1">When they accept <small>Instant</small></button>
+          <button type="button" role="tab" data-em="4" aria-selected="false" tabindex="-1">When payment is due <small>On due date</small></button>
+          <button type="button" role="tab" data-em="5" aria-selected="false" tabindex="-1">When it's done <small>Coming soon</small></button>
         </div>
-        <div class="mail">
-          <span class="when">When someone goes quiet</span>
-          <h3>Polite follow-ups</h3>
-          <p>Follow-ups on your schedule, stopped automatically the moment they reply.</p>
-        </div>
-        <div class="mail">
-          <span class="when">When they negotiate</span>
-          <h3>Counter-offers within your limits</h3>
-          <p>Your minimum rates and package options are applied for you. Anything below your floor waits for your approval.</p>
-        </div>
-        <div class="mail">
-          <span class="when">When your quote is accepted</span>
-          <h3>Meeting scheduling</h3>
-          <p>They pick a slot from your availability. No back-and-forth, and no calls with anyone who hasn't committed.</p>
-        </div>
-        <div class="mail">
-          <span class="when">When a payment is due</span>
-          <h3>Payment reminders</h3>
-          <p>Advance and balance reminders sent for you, with every payment recorded against the collab.</p>
-        </div>
-        <div class="mail">
-          <span class="when">When a collab is done</span>
-          <h3>Thank-you and repeat offers <span class="soon">Coming soon</span></h3>
-          <p>A closing email, then loyalty offers to past clients, never sent twice.</p>
+        <div class="mail-win show" role="tabpanel" aria-live="polite">
+          <div class="mail-bar" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="mail-head">
+            <div><span>From:</span> You, via Hustlo</div>
+            <div><span>To:</span> collabs@glowskin.example</div>
+            <div class="subj" id="em-subj"></div>
+          </div>
+          <div class="mail-body" id="em-body"></div>
+          <div class="mail-foot"><span id="em-when"></span><span class="tag auto" id="em-status"></span></div>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="features" style="padding-top:0">
+  <section class="who" id="try">
     <div class="wrap">
-      <div class="head">
-        <h2>All your collabs, in one view</h2>
-        <p>No more digging through DMs and email threads to find out where a deal stands.</p>
+      <div class="head reveal">
+        <h2>Try it: build a quote in seconds</h2>
+        <p>Pick deliverables and watch the quote, advance and balance update. In Hustlo, this goes out as a branded link the brand accepts in one tap.</p>
       </div>
-      <div class="features">
-        <div class="feat">
-          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="18" rx="1"/><rect x="14" y="3" width="7" height="11" rx="1"/></svg></div>
-          <h3>Collab pipeline</h3>
-          <p>Every deal by stage: new, negotiating, confirmed, in progress, live, paid.</p>
+      <div class="qb reveal">
+        <div class="qb-controls">
+          <div class="qrow"><div class="lbl"><b>Reels</b><span>₹8,000 each</span></div><div class="stepper" data-item="reel"><button type="button" aria-label="Fewer reels">−</button><output aria-live="polite">2</output><button type="button" aria-label="More reels">+</button></div></div>
+          <div class="qrow"><div class="lbl"><b>Stories</b><span>₹2,000 each</span></div><div class="stepper" data-item="story"><button type="button" aria-label="Fewer stories">−</button><output aria-live="polite">1</output><button type="button" aria-label="More stories">+</button></div></div>
+          <div class="qrow"><div class="lbl"><b>Posts</b><span>₹5,000 each</span></div><div class="stepper" data-item="post"><button type="button" aria-label="Fewer posts">−</button><output aria-live="polite">0</output><button type="button" aria-label="More posts">+</button></div></div>
+          <div class="qrow"><div class="lbl"><label for="qb-usage"><b>Ad usage rights (30 days)</b></label><span>+₹3,000</span></div><div class="switch"><input type="checkbox" id="qb-usage"><span></span></div></div>
+          <div class="qrow"><div class="lbl"><label for="qb-repeat"><b>Repeat client discount</b></label><span>10% off</span></div><div class="switch"><input type="checkbox" id="qb-repeat"><span></span></div></div>
+          <div class="qrow"><div class="lbl"><label for="qb-adv"><b>Advance</b></label><span id="qb-adv-lbl">50% before work starts</span></div><input type="range" id="qb-adv" min="0" max="100" step="10" value="50"></div>
         </div>
-        <div class="feat">
-          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
-          <h3>Collab enquiry form</h3>
-          <p>One link for your bio and media kit. Brands and clients share budget, deliverables and dates upfront.</p>
-        </div>
-        <div class="feat">
-          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 15l2 2 4-4"/></svg></div>
-          <h3>Rate card &amp; quotes</h3>
-          <p>Reels, stories, posts, videos and combos, with discounts, usage rights and add-ons priced automatically.</p>
-        </div>
-        <div class="feat">
-          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
-          <h3>Deliverables &amp; go-live dates</h3>
-          <p>Track scripts, drafts, approvals and posting dates for every collab.</p>
-        </div>
-        <div class="feat">
-          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-          <h3>Client history</h3>
-          <p>Every client's past collabs, payments and emails in one profile. Know your best repeat clients.</p>
-        </div>
-        <div class="feat">
-          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></div>
-          <h3>Earnings dashboard</h3>
-          <p>Collab income, pending payments and conversion rate by month and by content type.</p>
+        <div class="qb-quote" aria-live="polite">
+          <div class="mock-type" style="color:#A4ACBB">Quote preview</div>
+          <div id="qb-lines"></div>
+          <div class="qtotal"><small>Total</small><span id="qb-total">₹0</span></div>
+          <div class="split">
+            <div><small>Advance now</small><b id="qb-advance">₹0</b></div>
+            <div><small>Balance on delivery</small><b id="qb-balance">₹0</b></div>
+          </div>
+          <button type="button" class="btn btn-primary" id="qb-send" style="width:100%;margin-top:18px">Send quote</button>
+          <p class="qb-msg" id="qb-msg" role="status"></p>
+          <p class="qb-note">Sample rates for this demo. In Hustlo you set your own rate card.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="who" id="creators">
+  <section id="creators">
     <div class="wrap">
-      <div class="head">
+      <div class="head center reveal">
         <h2>Built for every kind of creator</h2>
-        <p>Whatever your niche, collabs follow the same pattern. Hustlo adapts to your content, rates and process.</p>
+        <p>Tap your niche to see a typical collab Hustlo can run.</p>
       </div>
-      <div class="niches">
-        <div class="niche"><h3>Fashion &amp; beauty</h3><p>Campaigns, launches and festive collections</p></div>
-        <div class="niche"><h3>Tech &amp; gadgets</h3><p>Unboxings, reviews and launch videos</p></div>
-        <div class="niche"><h3>Food</h3><p>Restaurant features and product placements</p></div>
-        <div class="niche"><h3>Travel</h3><p>Hotel stays and tourism campaigns</p></div>
-        <div class="niche"><h3>Poetry &amp; writing</h3><p>Paid features, recitals and written promotions</p></div>
-        <div class="niche"><h3>Fitness &amp; wellness</h3><p>Brand ambassadors and app promotions</p></div>
-        <div class="niche"><h3>Finance &amp; education</h3><p>App, course and platform promotions</p></div>
-        <div class="niche"><h3>Comedy &amp; entertainment</h3><p>Brand integrations in sketches and reels</p></div>
-        <div class="niche"><h3>Gaming</h3><p>Game launches and sponsored streams</p></div>
-        <div class="niche"><h3>Parenting &amp; lifestyle</h3><p>Product reviews and long-term partnerships</p></div>
-        <div class="niche"><h3>UGC creators</h3><p>Content for brand ads, with usage rights</p></div>
-        <div class="niche"><h3>Meme &amp; theme pages</h3><p>Paid promotions and shoutouts</p></div>
-        <div class="niche"><h3>Creator-to-creator</h3><p>Featuring, reviewing or promoting other creators' work</p></div>
-        <div class="niche"><h3>Music &amp; voice</h3><p>Song features, covers and voiceovers for promotions</p></div>
+      <div class="chips reveal" role="group" aria-label="Creator niches">
+        <button type="button" aria-pressed="true" data-ex="A festive campaign: 2 reels + 3 stories, 50% advance, go-live tracked">Fashion &amp; beauty</button>
+        <button type="button" aria-pressed="false" data-ex="A phone launch: 1 dedicated video, counter-offer handled within your floor">Tech &amp; gadgets</button>
+        <button type="button" aria-pressed="false" data-ex="A restaurant feature: 1 reel, call booked only after the quote is accepted">Food</button>
+        <button type="button" aria-pressed="false" data-ex="A hotel stay campaign: reels + stories, deliverables checklist per day">Travel</button>
+        <button type="button" aria-pressed="false" data-ex="A paid feature: recital reel + story, balance reminder sent the day it goes live">Poetry &amp; writing</button>
+        <button type="button" aria-pressed="false" data-ex="An app ambassador deal: monthly posts, every payment tracked">Fitness &amp; wellness</button>
+        <button type="button" aria-pressed="false" data-ex="A course promotion: 1 reel + link in bio, follow-ups stop the moment they reply">Finance &amp; education</button>
+        <button type="button" aria-pressed="false" data-ex="A brand integration in a sketch: script approval tracked before shooting">Comedy &amp; entertainment</button>
+        <button type="button" aria-pressed="false" data-ex="A game launch stream: sponsored session, advance collected first">Gaming</button>
+        <button type="button" aria-pressed="false" data-ex="A long-term product partnership: repeat collabs with loyalty offers">Parenting &amp; lifestyle</button>
+        <button type="button" aria-pressed="false" data-ex="Ad-ready videos for a brand, with usage rights priced as an add-on">UGC</button>
+        <button type="button" aria-pressed="false" data-ex="Paid shoutouts: quick quotes, quick payments, no DM back-and-forth">Meme &amp; theme pages</button>
+        <button type="button" aria-pressed="false" data-ex="Featuring another creator's work: quote, payment and posting date in one place">Creator-to-creator</button>
+        <button type="button" aria-pressed="false" data-ex="A song feature for a promotion: deliverables and approvals tracked">Music &amp; voice</button>
       </div>
+      <p class="chip-out" id="chip-out" aria-live="polite"><b>e.g.</b> <span>A festive campaign: 2 reels + 3 stories, 50% advance, go-live tracked</span></p>
     </div>
   </section>
 
@@ -588,6 +803,173 @@
     <span>© 2026 Hustlo</span>
   </div>
 </footer>
+
+<script>
+  (function () {
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const inr = n => "₹" + Math.round(n).toLocaleString("en-IN");
+
+    // Hero niche typing effect
+    (function () {
+      const el = document.getElementById("niche-rotator");
+      if (!el) return;
+      const words = ["fashion", "tech", "food", "travel", "poetry", "fitness", "finance", "comedy", "gaming", "lifestyle", "UGC", "music"];
+      if (reduce) { el.textContent = "every niche of"; return; }
+      let w = 0, i = words.at(0).length, deleting = false;
+      function step() {
+        const word = words.at(w);
+        if (!deleting) {
+          i++; el.textContent = word.slice(0, i);
+          if (i >= word.length) { deleting = true; return setTimeout(step, 1600); }
+          return setTimeout(step, 90);
+        }
+        i--; el.textContent = word.slice(0, i);
+        if (i <= 0) { deleting = false; w = (w + 1) % words.length; return setTimeout(step, 250); }
+        setTimeout(step, 45);
+      }
+      setTimeout(() => { deleting = true; step(); }, 1600);
+    })();
+
+    // Scroll reveal
+    const io = "IntersectionObserver" in window ? new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+    }), { threshold: 0, rootMargin: "0px 0px -8% 0px" }) : null;
+    document.querySelectorAll(".reveal").forEach(el => io && !reduce ? io.observe(el) : el.classList.add("in"));
+
+    // Before / after toggle
+    const baBtns = document.querySelectorAll("[data-ba]");
+    const panels = { before: document.getElementById("ba-before"), after: document.getElementById("ba-after") };
+    let baTouched = false;
+    function showBA(which) {
+      baBtns.forEach(b => b.setAttribute("aria-pressed", String(b.dataset.ba === which)));
+      Object.entries(panels).forEach(([k, p]) => { p.hidden = k !== which; p.classList.toggle("show", k === which); });
+    }
+    baBtns.forEach(b => b.addEventListener("click", () => { baTouched = true; showBA(b.dataset.ba); }));
+    const stage = document.querySelector(".ba-stage");
+    if ("IntersectionObserver" in window) {
+      const o = new IntersectionObserver(es => es.forEach(e => {
+        if (e.isIntersecting) { o.disconnect(); setTimeout(() => { if (!baTouched) showBA("after"); }, 2800); }
+      }), { threshold: 0.5 });
+      o.observe(stage);
+    }
+
+    // Generic tab helper with arrow keys
+    function tabs(list, onSelect) {
+      const btns = Array.from(list.querySelectorAll('[role="tab"]'));
+      btns.forEach((b, i) => {
+        b.addEventListener("click", () => onSelect(i, true));
+        b.addEventListener("keydown", e => {
+          const k = e.key;
+          if (["ArrowRight", "ArrowDown", "ArrowLeft", "ArrowUp"].includes(k)) {
+            e.preventDefault();
+            const n = (i + (k === "ArrowRight" || k === "ArrowDown" ? 1 : btns.length - 1)) % btns.length;
+            onSelect(n, true); btns.at(n).focus();
+          }
+        });
+      });
+      return btns;
+    }
+    function mark(btns, n) { btns.forEach((b, i) => { b.setAttribute("aria-selected", String(i === n)); b.tabIndex = i === n ? 0 : -1; }); }
+
+    // Stepper with autoplay
+    const stList = document.querySelector(".st-tabs");
+    const stPanels = Array.from(document.querySelectorAll(".st-panel"));
+    const bar = document.querySelector(".st-progress i");
+    let cur = 0, playing = !reduce, t0 = 0, raf = 0;
+    const DUR = 5000;
+    function showStep(n, user) {
+      cur = n; mark(stBtns, n);
+      stPanels.forEach((p, i) => { p.hidden = i !== n; p.classList.remove("show"); });
+      void stPanels.at(n).offsetWidth; stPanels.at(n).classList.add("show");
+      if (user) { playing = false; cancelAnimationFrame(raf); bar.style.width = ((n + 1) / stPanels.length * 100) + "%"; }
+      t0 = performance.now();
+    }
+    const stBtns = tabs(stList, showStep);
+    function tick(now) {
+      if (!playing) return;
+      const p = Math.min((now - t0) / DUR, 1);
+      bar.style.width = ((cur + p) / stPanels.length * 100) + "%";
+      if (p >= 1) showStep((cur + 1) % stPanels.length, false);
+      raf = requestAnimationFrame(tick);
+    }
+    if (playing && "IntersectionObserver" in window) {
+      const o = new IntersectionObserver(es => es.forEach(e => {
+        if (e.isIntersecting && playing) { t0 = performance.now(); raf = requestAnimationFrame(tick); }
+        else cancelAnimationFrame(raf);
+      }), { threshold: 0.4 });
+      o.observe(document.querySelector(".st"));
+    } else { bar.style.width = (100 / stPanels.length) + "%"; }
+
+    // Email preview
+    const emails = [
+      { s: "Thanks for reaching out: here's my quote", b: ["Hi team,", "Thanks for your collab request for 2 reels + 1 story. I'd love to work together.", "Your quote is ready: View and accept quote →", "Once you accept, you'll get a link to book a quick call."], w: "Sent 2 minutes after the request", st: "Sent automatically", c: "auto" },
+      { s: "Following up on your collab quote", b: ["Hi team,", "Just checking in on the quote I sent on Monday. It's still open, and I'm keeping your go-live dates free for now.", "View quote →"], w: "Sent after 3 days of silence · stops the moment they reply", st: "Sent automatically", c: "auto" },
+      { s: "Re: Collab quote", b: ["Hi team,", "Thanks for coming back on pricing. For this package, the best I can do is ₹18,000.", "If that works, you can accept the updated quote here: View quote →"], w: "Their offer was below your rate but above your floor", st: "Within your limits · sent automatically", c: "auto" },
+      { s: "Great, let's get started!", b: ["Hi team,", "Thanks for accepting the quote. Two quick next steps:", "1. Book a call: Pick a time →", "2. The 50% advance of ₹9,000 is due before work starts: Payment details →"], w: "Sent the moment the quote is accepted", st: "Sent automatically", c: "auto" },
+      { s: "Friendly reminder: balance due today", b: ["Hi team,", "The content went live yesterday, so the balance of ₹9,000 is due today: Payment details →", "Thanks again for a great collab!"], w: "Sent on the due date · stops once the payment is recorded", st: "Sent automatically", c: "auto" },
+      { s: "Thank you, and something for next time", b: ["Hi team,", "It was great working with you on this campaign.", "For your next one, here's 10% off as a returning brand. Just reply to this email when you're ready."], w: "Sent when the collab is marked complete", st: "Coming soon", c: "soon2" }
+    ];
+    const win = document.querySelector(".mail-win");
+    const subj = document.getElementById("em-subj"), body = document.getElementById("em-body");
+    const when = document.getElementById("em-when"), status = document.getElementById("em-status");
+    function showEmail(n) {
+      mark(emBtns, n);
+      const e = emails.at(n);
+      subj.textContent = e.s; when.textContent = e.w; status.textContent = e.st; status.className = "tag " + e.c;
+      body.replaceChildren(...e.b.concat(["— [Your name]"]).map(line => { const p = document.createElement("p"); p.textContent = line; return p; }));
+      win.classList.remove("show"); void win.offsetWidth; win.classList.add("show");
+    }
+    const emBtns = tabs(document.querySelector(".em-list"), showEmail);
+    showEmail(0);
+
+    // Quote builder
+    const rates = { reel: 8000, story: 2000, post: 5000 };
+    const labels = { reel: "Reel", story: "Story", post: "Post" };
+    const qty = { reel: 2, story: 1, post: 0 };
+    const usage = document.getElementById("qb-usage"), repeat = document.getElementById("qb-repeat"), adv = document.getElementById("qb-adv");
+    const lines = document.getElementById("qb-lines");
+    function line(label, value) {
+      const d = document.createElement("div"); d.className = "ql";
+      const a = document.createElement("span"); a.textContent = label;
+      const b = document.createElement("b"); b.textContent = value;
+      d.append(a, b); return d;
+    }
+    function calc() {
+      const rows = [];
+      let sub = 0;
+      Object.keys(rates).forEach(k => { if (qty[k]) { const v = qty[k] * rates[k]; sub += v; rows.push(line(`${labels[k]} × ${qty[k]}`, inr(v))); } });
+      if (usage.checked) { sub += 3000; rows.push(line("Ad usage rights (30 days)", inr(3000))); }
+      if (!rows.length) rows.push(line("Add a deliverable to start", "—"));
+      const disc = repeat.checked ? sub * 0.1 : 0;
+      if (disc) rows.push(line("Repeat client discount (10%)", "−" + inr(disc)));
+      const total = sub - disc, pct = Number(adv.value);
+      lines.replaceChildren(...rows);
+      document.getElementById("qb-total").textContent = inr(total);
+      document.getElementById("qb-advance").textContent = inr(total * pct / 100);
+      document.getElementById("qb-balance").textContent = inr(total - total * pct / 100);
+      document.getElementById("qb-adv-lbl").textContent = pct ? `${pct}% before work starts` : "No advance";
+      document.getElementById("qb-msg").textContent = "";
+    }
+    document.querySelectorAll(".stepper").forEach(s => {
+      const k = s.dataset.item, out = s.querySelector("output"), [minus, plus] = s.querySelectorAll("button");
+      minus.addEventListener("click", () => { qty[k] = Math.max(0, qty[k] - 1); out.textContent = qty[k]; calc(); });
+      plus.addEventListener("click", () => { qty[k] = Math.min(10, qty[k] + 1); out.textContent = qty[k]; calc(); });
+    });
+    [usage, repeat, adv].forEach(el => el.addEventListener("input", calc));
+    document.getElementById("qb-send").addEventListener("click", () => {
+      document.getElementById("qb-msg").textContent = "In Hustlo, this sends a branded quote link, then follow-ups run on their own.";
+    });
+    calc();
+
+    // Creator chips
+    const chipOut = document.querySelector("#chip-out span");
+    const chips = document.querySelectorAll(".chips button");
+    chips.forEach(c => c.addEventListener("click", () => {
+      chips.forEach(x => x.setAttribute("aria-pressed", String(x === c)));
+      chipOut.textContent = c.dataset.ex;
+    }));
+  })();
+</script>
 
 <button class="to-top" id="toTop" type="button" aria-label="Back to top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
 

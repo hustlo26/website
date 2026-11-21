@@ -725,7 +725,7 @@
               <label for="phone">Phone number</label>
               <div class="phone">
                 <span aria-hidden="true">+91</span>
-                <input id="phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="98765 43210" maxlength="14" required aria-describedby="phone-err">
+                <input id="phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="98765 43210" maxlength="18" required aria-describedby="phone-err">
               </div>
               <p class="err-msg" id="phone-err"></p>
               <label class="check-row"><input type="checkbox" id="wa-same" checked> This is my WhatsApp number too</label>
@@ -734,7 +734,7 @@
               <label for="whatsapp">WhatsApp number</label>
               <div class="phone">
                 <span aria-hidden="true">+91</span>
-                <input id="whatsapp" name="whatsapp" type="tel" inputmode="numeric" placeholder="98765 43210" maxlength="14" aria-describedby="whatsapp-err">
+                <input id="whatsapp" name="whatsapp" type="tel" inputmode="numeric" placeholder="98765 43210" maxlength="18" aria-describedby="whatsapp-err">
               </div>
               <p class="err-msg" id="whatsapp-err"></p>
             </div>
@@ -1062,6 +1062,7 @@
   }
   function phoneError(v, what) {
     if (!v.trim()) return `Please enter your ${what}.`;
+    if (/[^\d\s+-]/.test(v)) return "Use numbers only (spaces and dashes are fine).";
     const d = mobileDigits(v);
     if (d.length !== 10) return `Enter a 10-digit mobile number (you entered ${d.length} digit${d.length === 1 ? "" : "s"}).`;
     if (!/^[6-9]/.test(d)) return "Indian mobile numbers start with 6, 7, 8 or 9.";
@@ -1106,6 +1107,25 @@
     el.addEventListener("blur", () => { if (el.value) check(id); });
     el.addEventListener(el.tagName === "SELECT" ? "change" : "input", () => {
       if (el.getAttribute("aria-invalid") === "true") check(id);
+    });
+  });
+
+  // Phone fields: only allow digits, spaces, + and - (blocks letters as they're typed or pasted).
+  ["phone", "whatsapp"].forEach(id => {
+    const el = document.getElementById(id);
+    el.addEventListener("input", () => {
+      let clean = el.value.replace(/[^\d\s+-]/g, "");
+      // Cap digits: 10 for a plain number, 11 with a leading 0, 12 with a 91 country code.
+      const all = clean.replace(/\D/g, "");
+      const max = all.startsWith("91") ? 12 : all.startsWith("0") ? 11 : 10;
+      let n = 0;
+      clean = clean.replace(/\d/g, c => (++n <= max ? c : ""));
+      if (clean !== el.value) {
+        const pos = el.selectionStart - (el.value.length - clean.length);
+        el.value = clean;
+        el.setSelectionRange(pos, pos);
+        if (el.getAttribute("aria-invalid") === "true") check(id);
+      }
     });
   });
 
